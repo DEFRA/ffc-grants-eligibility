@@ -1,6 +1,7 @@
 const server = require('./server')
 
 const init = async () => {
+  require('./messaging/receivers').startTest()
   await server.start()
   console.log('Server running on %s', server.info.uri)
 }
