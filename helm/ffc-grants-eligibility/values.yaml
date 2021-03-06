@@ -6,6 +6,10 @@ image: ffc-grants-eligibility
 
 labels: {}
 
+azureIdentity:
+  clientID: not-a-real-clientID
+  resourceID: not-a-real-resourceID
+
 containerConfigMap:
   name: ffc-grants-eligibility-config-map
 
