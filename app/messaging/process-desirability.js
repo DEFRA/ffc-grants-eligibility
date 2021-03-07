@@ -1,4 +1,4 @@
-const { calculateScore } = require('./senders')
+const { sendCalculateScore } = require('./senders')
 
 module.exports = async function (msg, projectDetailsReceiver) {
   try {
@@ -6,12 +6,12 @@ module.exports = async function (msg, projectDetailsReceiver) {
     console.log('Received project details message:')
     console.log(body)
 
-    await calculateScore({ test: 'Calculate the desirability' })
+    await sendCalculateScore({ test: 'Calculate the desirability' })
 
     await projectDetailsReceiver.completeMessage(msg)
   } catch (err) {
-    console.err('Unable to process message')
-    console.err(err)
+    console.error('Unable to process message')
+    console.error(err)
     await projectDetailsReceiver.abandonMessage(msg)
   }
 }
