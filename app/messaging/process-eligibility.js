@@ -5,8 +5,8 @@ module.exports = async function (msg, eligibilityAnswersReceiver) {
     console.log(body)
     await eligibilityAnswersReceiver.completeMessage(msg)
   } catch (err) {
-    console.err('Unable to process message')
-    console.err(err)
+    console.error('Unable to process message')
+    console.error(err)
     await eligibilityAnswersReceiver.abandonMessage(msg)
   }
 }

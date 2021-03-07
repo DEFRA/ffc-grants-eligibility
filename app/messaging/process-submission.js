@@ -1,4 +1,4 @@
-const { desirabilitySubmitted } = require('./senders')
+const { sendDesirabilitySubmitted } = require('./senders')
 
 module.exports = async function (msg, contactDetailsReceiver) {
   try {
@@ -6,12 +6,12 @@ module.exports = async function (msg, contactDetailsReceiver) {
     console.log('Received contact details message:')
     console.log(body)
 
-    await desirabilitySubmitted({ test: 'Process submission' })
+    await sendDesirabilitySubmitted({ test: 'Process submission' })
 
     await contactDetailsReceiver.completeMessage(msg)
   } catch (err) {
-    console.err('Unable to process message')
-    console.err(err)
+    console.error('Unable to process message')
+    console.error(err)
     await contactDetailsReceiver.abandonMessage(msg)
   }
 }
