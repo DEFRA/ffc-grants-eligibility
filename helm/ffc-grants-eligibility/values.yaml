@@ -13,6 +13,10 @@ azureIdentity:
 containerConfigMap:
   name: ffc-grants-eligibility-config-map
 
+containerSecret:
+  name: ffc-demo-eligibility-container-secret
+  type: Opaque
+
 deployment:
   restartPolicy: Always
   priorityClassName: default
