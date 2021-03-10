@@ -4,6 +4,7 @@ const processEligibilityAction = require('./messaging/process-eligibility')
 const processDesirabiltyAction = require('./messaging/process-desirability')
 const processSubmissionAction = require('./messaging/process-submission')
 const desirabilityScoreAction = require('./messaging/desirability-score')
+const cache = require('./cache')
 
 const init = async () => {
   receivers.startEligibilityAnswersReceiver(processEligibilityAction)
@@ -14,18 +15,10 @@ const init = async () => {
   await server.start()
   console.log('Server running on %s', server.info.uri)
 
-  const myCache = server.cache({
-    expiresIn: 3600 * 1000, // 1 hour
-    segment: 'test-segment'
-  })
-
-  console.log(`Redis cache is ready to use: ${myCache.isReady()}`)
-
-  const key = 'testing-redis'
-  await myCache.set(key, 'A nice value to test Redis cache')
-
-  const value = await myCache.get(key)
-  console.log(value)
+  cache.initialise(server)
+  const key = 'testKey'
+  await cache.set(key, 'testValue')
+  console.log(`Testing get value: ${await cache.get(key)}`)
 }
 
 process.on('unhandledRejection', (err) => {

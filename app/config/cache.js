@@ -1,5 +1,6 @@
 module.exports = {
   cacheName: 'redisCache', // FIXME: might not need this
+  useRedis: process.env.NODE_ENV !== 'test',
   catboxOptions: {
     host: process.env.REDIS_HOSTNAME,
     port: process.env.REDIS_PORT,
