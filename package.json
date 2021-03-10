@@ -13,6 +13,7 @@
   "contributors": [],
   "license": "OGL-UK-3.0",
   "dependencies": {
+    "@hapi/catbox-redis": "^6.0.2",
     "@hapi/hapi": "^20.0.3",
     "applicationinsights": "^1.8.10",
     "ffc-messaging": "^2.1.1"

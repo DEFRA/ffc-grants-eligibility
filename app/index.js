@@ -13,6 +13,19 @@ const init = async () => {
 
   await server.start()
   console.log('Server running on %s', server.info.uri)
+
+  const myCache = server.cache({
+    expiresIn: 3600 * 1000, // 1 hour
+    segment: 'test-segment'
+  })
+
+  console.log(`Redis cache is ready to use: ${myCache.isReady()}`)
+
+  const key = 'testing-redis'
+  await myCache.set(key, 'A nice value to test Redis cache')
+
+  const value = await myCache.get(key)
+  console.log(value)
 }
 
 process.on('unhandledRejection', (err) => {
