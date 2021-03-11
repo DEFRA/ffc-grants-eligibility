@@ -16,9 +16,14 @@ const init = async () => {
   console.log('Server running on %s', server.info.uri)
 
   cache.initialise(server)
+
   const key = 'testKey'
-  await cache.set(key, 'testValue')
-  console.log(`Testing get value: ${await cache.get(key)}`)
+  await cache.setDesirabilityScore(key, 'testValue')
+  console.log(`Testing get value: ${await cache.getDesirabilityScore(key)}`)
+
+  const key2 = 'testKey2'
+  await cache.setProjectDetails(key2, 'testValue2')
+  console.log(`Testing get value: ${await cache.getProjectDetails(key2)}`)
 }
 
 process.on('unhandledRejection', (err) => {

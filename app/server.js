@@ -7,7 +7,7 @@ const server = Hapi.server({
   cache: [{
     provider: {
       constructor: catbox,
-      options: cacheConfig.catboxOptions
+      options: cacheConfig.redisCatboxOptions // FIXME: diff values for catbox memory
     }
   }]
 })
