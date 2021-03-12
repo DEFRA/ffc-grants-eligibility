@@ -1,6 +1,6 @@
 {
   "name": "ffc-grants-eligibility",
-  "version": "2.1.1",
+  "version": "2.2.0",
   "description": "FFC Grants eligibilitya and desirability microservice",
   "homepage": "https://github.com/DEFRA/ffc-grants-eligibility",
   "main": "app/index.js",
@@ -10,14 +10,18 @@
     "start:watch": "nodemon --inspect=0.0.0.0 --ext js --legacy-watch app/index.js"
   },
   "author": "Defra",
-  "contributors": [],
+  "contributors": [
+    "paul.andrews@defra.gov.uk"
+  ],
   "license": "OGL-UK-3.0",
   "dependencies": {
+    "@hapi/catbox-redis": "^6.0.2",
     "@hapi/hapi": "^20.0.3",
     "applicationinsights": "^1.8.10",
     "ffc-messaging": "^2.1.1"
   },
   "devDependencies": {
+    "@hapi/catbox-memory": "^5.0.0",
     "jest": "^26.6.3",
     "jest-junit": "^12.0.0",
     "nodemon": "^2.0.7",

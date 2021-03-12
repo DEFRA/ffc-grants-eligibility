@@ -11,4 +11,7 @@ data:
   DESIRABILITY_SCORE_SUBSCRIPTION_ADDRESS: {{ quote .Values.container.desirabilityScoreSubscriptionAddress }}
   DESIRABILITY_SCORE_TOPIC_ADDRESS: {{ quote .Values.container.desirabilityScoreTopicAddress }}
   DESIRABILITY_SUBMITTED_TOPIC_ADDRESS: {{ quote .Values.container.desirabilitySubmittedTopicAddress }}
+  REDIS_HOSTNAME: {{ quote .Values.container.redisHostname }}
+  REDIS_PORT: {{ quote .Values.container.redisPort }}
+  REDIS_PARTITION: {{ quote .Values.container.redisPartition }}
 {{- end -}}

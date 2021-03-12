@@ -13,6 +13,10 @@ azureIdentity:
 containerConfigMap:
   name: ffc-grants-eligibility-config-map
 
+containerSecret:
+  name: ffc-demo-eligibility-container-secret
+  type: Opaque
+
 deployment:
   restartPolicy: Always
   priorityClassName: default
@@ -39,6 +43,10 @@ container:
   desirabilityScoreSubscriptionAddress: desirability-score-subscription
   desirabilityScoreTopicAddress: desirability-score-topic
   desirabilitySubmittedTopicAddress: desirability-submitted
+  redisHostname: redis
+  redisPassword: redis
+  redisPort: 6379
+  redisPartition: ffc-grants-eligibility
 
 livenessProbe:
   path: /healthz
