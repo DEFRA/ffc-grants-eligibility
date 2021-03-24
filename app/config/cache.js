@@ -6,10 +6,6 @@ module.exports = {
     name: 'desirablityScores',
     expiresIn: defaultExpiresIn
   },
-  projectDetailsSegment: {
-    name: 'projectDetails',
-    expiresIn: defaultExpiresIn
-  },
   redisCatboxOptions: {
     host: process.env.REDIS_HOSTNAME,
     port: process.env.REDIS_PORT,
