@@ -1,12 +1,13 @@
 const { sendCalculateScore } = require('./senders')
+const createMsg = require('./create-msg')
 
 module.exports = async function (msg, projectDetailsReceiver) {
   try {
-    const { body, correlationId } = msg
-    console.log('Received project details message:')
-    console.log(body)
+    const { body: desirabilityAnswers, correlationId } = msg
 
-    await sendCalculateScore({ test: 'Calculate the desirability' }, correlationId)
+    // FIXME: tidy console log and add result to cache
+
+    await sendCalculateScore(createMsg.desirability(desirabilityAnswers), correlationId)
 
     await projectDetailsReceiver.completeMessage(msg)
   } catch (err) {
