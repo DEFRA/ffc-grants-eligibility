@@ -19,7 +19,7 @@ process.on('SIGINT', async () => {
   process.exit(0)
 })
 
-async function sendMsg (sender, msgData, correlationId, msgType) {
+async function sendMsg (sender, msgData, msgType, correlationId) {
   const msg = {
     body: msgData,
     type: msgType,
@@ -37,16 +37,16 @@ module.exports = {
     await sendMsg(
       calculateScoreSender,
       calculateScoreData,
-      correlationId,
-      msgCfg.calculateScoreMsgType
+      msgCfg.calculateScoreMsgType,
+      correlationId
     )
   },
   sendDesirabilitySubmitted: async function (desirabilitySubmittedData, correlationId) {
     await sendMsg(
       desirabilitySubmittedSender,
       desirabilitySubmittedData,
-      correlationId,
-      msgCfg.desirabilitySubmittedMsgType
+      msgCfg.desirabilitySubmittedMsgType,
+      correlationId
     )
   }
 }
