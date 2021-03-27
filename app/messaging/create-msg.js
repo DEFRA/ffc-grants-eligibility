@@ -1,5 +1,6 @@
 const grantSchemeConfig = require('../config/grant-scheme')
 const questionContent = require('../content-mapping')
+const desirabilityQuestions = ['Q14', 'Q15', 'Q16', 'Q17', 'Q18', 'Q19', 'Q20']
 
 const userInputQuestionMapping = {
   Q14: 'project',
@@ -42,8 +43,6 @@ function getQuestionDetails (questionKey, userInput) {
 }
 
 function desirability (userInput) {
-  const desirabilityQuestions = ['Q14', 'Q15', 'Q16', 'Q17', 'Q18', 'Q19', 'Q20']
-
   return {
     grantScheme: {
       key: grantSchemeConfig.key,
