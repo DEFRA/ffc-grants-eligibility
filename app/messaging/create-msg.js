@@ -2,7 +2,7 @@ const grantSchemeConfig = require('../config/grant-scheme')
 const questionContent = require('../content-mapping')
 const desirabilityQuestions = ['Q14', 'Q15', 'Q16', 'Q17', 'Q18', 'Q19', 'Q20']
 
-const userInputQuestionMapping = {
+const desirabilityInputQuestionMapping = {
   Q14: 'project',
   Q15: 'irrigatedCrops',
   Q16a: 'irrigatedLandCurrent',
@@ -32,7 +32,7 @@ function getQuestionDetails (questionKey, userInput) {
     answers: content.map(({ key, title, answers }) => ({
       key,
       title,
-      input: getUserAnswer(answers, userInput[userInputQuestionMapping[key]])
+      input: getUserAnswer(answers, userInput[desirabilityInputQuestionMapping[key]])
     })),
     rating: {
       score: null,
