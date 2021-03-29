@@ -1,19 +1,6 @@
 const grantSchemeConfig = require('../config/grant-scheme')
-const questionContent = require('../content-mapping')
+const { desirabilityInputQuestionMapping, desirabilityQuestions: questionContent } = require('../content-mapping')
 const desirabilityQuestions = ['Q14', 'Q15', 'Q16', 'Q17', 'Q18', 'Q19', 'Q20']
-
-const desirabilityInputQuestionMapping = {
-  Q14: 'project',
-  Q15: 'irrigatedCrops',
-  Q16a: 'irrigatedLandCurrent',
-  Q16b: 'irrigatedLandTarget',
-  Q17a: 'waterSourceCurrent',
-  Q17b: 'waterSourcePlanned',
-  Q18a: 'irrigationCurrent',
-  Q18b: 'irrigationPlanned',
-  Q19: 'productivity',
-  Q20: 'collaboration'
-}
 
 function getUserAnswer (answers, userInput) {
   if (answers) {
@@ -24,7 +11,7 @@ function getUserAnswer (answers, userInput) {
   }
 }
 
-function getQuestionDetails (questionKey, userInput) {
+function getDesirabilityDetails (questionKey, userInput) {
   const content = questionContent[questionKey]
 
   return {
@@ -49,7 +36,7 @@ function desirability (userInput) {
       name: grantSchemeConfig.name
     },
     desirability: {
-      questions: desirabilityQuestions.map(questionKey => getQuestionDetails(questionKey, userInput)),
+      questions: desirabilityQuestions.map(questionKey => getDesirabilityDetails(questionKey, userInput)),
       overallRating: {
         score: null,
         band: null
@@ -58,6 +45,4 @@ function desirability (userInput) {
   }
 }
 
-module.exports = {
-  desirability
-}
+module.exports = desirability

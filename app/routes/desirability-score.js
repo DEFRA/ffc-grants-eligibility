@@ -7,10 +7,10 @@ module.exports = {
     const { correlationId: key } = request.query
 
     if (key) {
-      const value = await cache.getDesirabilityScore(key)
+      const desirabilityScore = await cache.getDesirabilityScore(key)
 
-      if (value) {
-        return h.response({ value }).code(200)
+      if (desirabilityScore) {
+        return h.response(desirabilityScore).code(200)
       }
 
       return h.response(`value for ${key} not in cache, try later`).code(202)

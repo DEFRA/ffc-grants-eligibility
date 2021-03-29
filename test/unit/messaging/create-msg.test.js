@@ -109,13 +109,27 @@ describe('Create messages', () => {
 
   beforeEach(() => {
     jest.mock('../../../app/config/grant-scheme', () => mockGrantScheme)
-    jest.mock('../../../app/content-mapping', () => mockQuestionContent)
-    createMsg = require('../../../app/messaging/create-msg')
+    jest.mock('../../../app/content-mapping', () => ({
+      desirabilityQuestions: mockQuestionContent,
+      desirabilityInputQuestionMapping: {
+        Q14: 'project',
+        Q15: 'irrigatedCrops',
+        Q16a: 'irrigatedLandCurrent',
+        Q16b: 'irrigatedLandTarget',
+        Q17a: 'waterSourceCurrent',
+        Q17b: 'waterSourcePlanned',
+        Q18a: 'irrigationCurrent',
+        Q18b: 'irrigationPlanned',
+        Q19: 'productivity',
+        Q20: 'collaboration'
+      }
+    }))
+    createMsg = require('../../../app/messaging/create-desirability-msg')
   })
 
   describe('Desirability message', () => {
     beforeEach(() => {
-      msg = createMsg.desirability(mockUserInput)
+      msg = createMsg(mockUserInput)
     })
 
     test('adds grant scheme details', () => {
