@@ -14,6 +14,7 @@ const server = Hapi.server({
 })
 
 const routes = [].concat(
+  require('./routes/desirability-score'),
   require('./routes/healthy'),
   require('./routes/healthz')
 )
