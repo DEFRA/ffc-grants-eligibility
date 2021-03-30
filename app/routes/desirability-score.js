@@ -1,4 +1,5 @@
 const cache = require('../cache')
+const { desirabilityInputQuestionMapping: questionMapping } = require('../content-mapping')
 
 module.exports = {
   method: 'GET',
@@ -10,6 +11,7 @@ module.exports = {
       const desirabilityScore = await cache.getDesirabilityScore(key)
 
       if (desirabilityScore) {
+        Object.assign(desirabilityScore, { questionMapping })
         return h.response(desirabilityScore).code(200)
       }
 

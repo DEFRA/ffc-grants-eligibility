@@ -1,6 +1,7 @@
 describe('desirability-score route test', () => {
   const server = require('../../../../app/server')
   const cache = require('../../../../app/cache')
+  const { desirabilityInputQuestionMapping: questionMapping } = require('../../../../app/content-mapping')
 
   beforeAll(() => {
     cache.initialise(server)
@@ -30,7 +31,7 @@ describe('desirability-score route test', () => {
 
   test('GET /desirability-score route returns 200 with cache entry for correlationId parameter', async () => {
     const testKey = 'testKey'
-    const testValue = 'testValue'
+    const testValue = { test: 'testValue' }
     const options = {
       method: 'GET',
       url: `/desirability-score?correlationId=${testKey}`
@@ -39,7 +40,9 @@ describe('desirability-score route test', () => {
     await cache.setDesirabilityScore(testKey, testValue)
 
     const response = await server.inject(options)
-    expect(response.payload).toEqual(testValue)
+    const payload = JSON.parse(response.payload)
+    expect(payload).toEqual(expect.objectContaining(testValue))
+    expect(payload).toEqual(expect.objectContaining({ questionMapping }))
     expect(response.statusCode).toBe(200)
   })
 
