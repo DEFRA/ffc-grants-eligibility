@@ -1,12 +1,19 @@
 const { sendCalculateScore } = require('./senders')
+const createMsg = require('./create-desirability-msg')
+const cache = require('../cache')
 
 module.exports = async function (msg, projectDetailsReceiver) {
   try {
-    const { body } = msg
-    console.log('Received project details message:')
-    console.log(body)
+    const { body: desirabilityAnswers, correlationId } = msg
+    console.log(desirabilityAnswers)
 
-    await sendCalculateScore({ test: 'Calculate the desirability' })
+    // Remove any previous cache entries with the given correlationId
+    // For simplicity we will recalculate every time
+    await cache.removeDesirabilityScore(correlationId)
+
+    const desirabilityMsg = createMsg(desirabilityAnswers)
+    console.log(JSON.stringify(desirabilityMsg, null, 2))
+    await sendCalculateScore(desirabilityMsg, correlationId)
 
     await projectDetailsReceiver.completeMessage(msg)
   } catch (err) {

@@ -9,11 +9,6 @@ const sharedConfig = {
 const msgTypePrefix = 'uk.gov.ffc.grants'
 
 module.exports = {
-  eligibilityAnswersQueue: {
-    address: process.env.ELIGIBILITY_ANSWERS_QUEUE_ADDRESS,
-    type: 'queue',
-    ...sharedConfig
-  },
   projectDetailsQueue: {
     address: process.env.PROJECT_DETAILS_QUEUE_ADDRESS,
     type: 'queue',

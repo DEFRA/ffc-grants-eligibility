@@ -23,15 +23,6 @@ describe('Cache test', () => {
     expect(getValue).toEqual(setValue)
   })
 
-  test('set and retrieve value from project details cache', async () => {
-    const key = 'testKey'
-    const setValue = 'testValue'
-    await cache.setProjectDetails(key, setValue)
-    const getValue = await cache.getProjectDetails(key)
-
-    expect(getValue).toEqual(setValue)
-  })
-
   afterEach(async () => {
     await server.stop()
   })
