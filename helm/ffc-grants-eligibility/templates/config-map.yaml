@@ -13,4 +13,5 @@ data:
   REDIS_HOSTNAME: {{ quote .Values.container.redisHostname }}
   REDIS_PORT: {{ quote .Values.container.redisPort }}
   REDIS_PARTITION: {{ quote .Values.container.redisPartition }}
+  APPINSIGHTS_CLOUDROLE: {{ quote .Values.name }}
 {{- end -}}

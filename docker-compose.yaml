@@ -21,3 +21,5 @@ services:
       REDIS_PORT: 6379
       REDIS_PARTITION: ffc-grants-eligibility
       REDIS_PASSWORD: ""
+      APPINSIGHTS_CLOUDROLE: ffc-grants-eligibility
+      APPINSIGHTS_INSTRUMENTATIONKEY: ""
