@@ -4,7 +4,7 @@ const Joi = require('joi')
 const schema = Joi.object({
   appInsights: {
     key: Joi.string(),
-    role: Joi.string().default('ffc-grants-frontend')
+    role: Joi.string().default('ffc-grants-eligibility')
   }
 })
 
