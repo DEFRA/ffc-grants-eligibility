@@ -49,6 +49,10 @@ container:
   redisPassword: redis
   redisPort: 6379
   redisPartition: ffc-grants-eligibility
+  notifyEmailTemplate: dummy-template
+  worksheetProtectPassword: dummy-pwd
+  worksheetProtectEnabled: false
+  worksheetHideEmptyRows: false
 
 livenessProbe:
   path: /healthz
