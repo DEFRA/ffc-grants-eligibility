@@ -24,10 +24,6 @@ function farmingTypeMapping (farmingType) {
   }
 }
 
-function agentApplication (applicant) {
-  return applicant === 'Agent'
-}
-
 function calculateBusinessSize (employees, turnover) {
   const employeesNum = Number(employees)
   const turnoverNum = Number(turnover)
@@ -43,32 +39,50 @@ function calculateBusinessSize (employees, turnover) {
   }
 }
 
+function generateExcelFilename (scheme, projectName, businessName, referenceNumber, today) {
+  const dateTime = new Intl.DateTimeFormat('en-GB', {
+    timeStyle: 'short',
+    dateStyle: 'short',
+    timeZone: 'Europe/London'
+  }).format(today).replace(/\//g, '-')
+  return `${scheme}_${projectName}_${businessName}_${referenceNumber}_${dateTime}.xlsx`
+}
+
 function getSpreadsheetDetails (submission, desirabilityScore) {
   const today = new Date()
   const todayStr = today.toLocaleDateString('en-GB')
+  const subScheme = 'FTF-Water'
 
   return {
-    filename: `${submission.confirmationId}.xlsx`, // FIXME: there is more info on this
+    filename: generateExcelFilename(
+      subScheme,
+      submission.businessDetails.projectName,
+      submission.businessDetails.businessName,
+      submission.confirmationId,
+      today
+    ),
     worksheets: [
       {
         title: 'DORA DATA',
-        protectPassword: spreadsheetConfig.worksheetProtectPassword,
+        ...(spreadsheetConfig.protectEnabled ? { protectPassword: spreadsheetConfig.protectPassword } : {}),
+        hideEmptyRows: spreadsheetConfig.hideEmptyRows,
         defaultColumnWidth: 30,
         rows: [
           generateRow(1, 'Field Name', 'Field Value', true),
+          generateRow(2, 'FA or OA', 'Outline Application'),
           generateRow(40, 'Scheme', 'Farming Transformation Fund'),
-          generateRow(39, 'Sub scheme', 'FTF-Water'),
-          generateRow(43, 'Theme', '?????'),
-          generateRow(90, 'Project type', '?????'),
+          generateRow(39, 'Sub scheme', subScheme),
+          generateRow(43, 'Theme', 'Water Resource Management'),
+          generateRow(90, 'Project type', 'Water management'),
           generateRow(41, 'Owner', 'RD'),
-          generateRow(341, 'Grant Application Window', '?????'),
+          generateRow(341, 'Grant Application Window', ''),
           generateRow(53, 'Business Type', farmingTypeMapping(submission.farmingType)),
           generateRow(23, 'Status of applicant', submission.legalStatus),
           generateRow(45, 'Location of project (postcode)', submission.projectPostcode),
           generateRow(342, 'Land owned by Farm', submission.landOwnership),
-          generateRow(343, 'Tenancy for next 5 years', submission.tenancyLength ?? ''), // FIXME: check value if not in frontend yar
+          generateRow(343, 'Tenancy for next 5 years', submission.tenancyLength ?? ''),
           generateRow(344, 'Irrigation Infrastructure ', submission.projectItemsList.join('|')),
-          generateRow(55, 'Total project expenditure', submission.projectCost),
+          generateRow(55, 'Total project expenditure', String(submission.projectCost)),
           generateRow(57, 'Grant rate', '40%'),
           generateRow(56, 'Grant amount requested', submission.calculatedGrant),
           generateRow(345, 'Remaining Cost to Farmer', submission.remainingCost),
@@ -77,7 +91,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(348, 'Irrigation Impact', submission.project.join('|')),
           generateRow(349, 'Irrigation Impact Score', getQuestionScoreBand(desirabilityScore.desirability.questions, 'Q14')),
           generateRow(350, 'Irrigation Farming Scale (AKA Crop Type)', submission.irrigatedCrops),
-          generateRow(351, 'Irrigation Crop Score', '?????'),
+          generateRow(351, 'Irrigation Crop Score', ''),
           generateRow(352, 'As-Is Irrigation (ha)', submission.irrigatedLandCurrent),
           generateRow(353, 'To-Be Irrigation (ha)', submission.irrigatedLandTarget),
           generateRow(354, 'Irrigation Hectare Score', getQuestionScoreBand(desirabilityScore.desirability.questions, 'Q16')),
@@ -91,47 +105,51 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(362, 'Irrigation Productivity Score', getQuestionScoreBand(desirabilityScore.desirability.questions, 'Q19')),
           generateRow(363, 'Benefits Other Farms', submission.collaboration),
           generateRow(364, 'Other Farms Benefit Score', getQuestionScoreBand(desirabilityScore.desirability.questions, 'Q20')),
-          generateRow(49, 'Site of Special Scientific Interest (SSSI)', submission.sssi),
+          generateRow(49, 'Site of Special Scientific Interest (SSSI)', submission.sSSI),
           generateRow(365, 'OA score', desirabilityScore.desirability.overallRating.band),
-          generateRow(366, 'Date of OA decision', todayStr),
+          generateRow(366, 'Date of OA decision', ''),
           generateRow(42, 'Project name', submission.businessDetails.projectName),
-          generateRow(4, 'Single business identifier (SBI)', submission.businessDetails.sbi || '000000000'), // FIXME: check if '' or null
+          generateRow(4, 'Single business identifier (SBI)', submission.businessDetails.sbi || '000000000'), // sbi is '' if not set so use || instead of ??
           generateRow(7, 'Business name', submission.businessDetails.businessName),
           generateRow(367, 'Annual Turnover', submission.businessDetails.businessTurnover),
           generateRow(22, 'Employees', submission.businessDetails.numberEmployees),
           generateRow(20, 'Business size', calculateBusinessSize(submission.businessDetails.numberEmployees, submission.businessDetails.businessTurnover)),
           generateRow(44, 'Description of project', submission.projectItemsList.join(', ').substring(0, 60)),
-          generateRow(91, 'Are you an AGENT applying on behalf of your customer', agentApplication(submission.applying) ? 'Yes' : 'No'),
-          generateRow(3, 'Title', agentApplication(submission.applying) ? submission.agentDetails.title : submission.farmerDetails.title),
-          generateRow(5, 'Surname', agentApplication(submission.applying) ? submission.agentDetails.lastName : submission.farmerDetails.lastName),
-          generateRow(6, 'Forename', agentApplication(submission.applying) ? submission.agentDetails.firstName : submission.farmerDetails.firstName),
+          generateRow(91, 'Are you an AGENT applying on behalf of your customer', submission.applying === 'Agent' ? 'Yes' : 'No'),
+          generateRow(5, 'Surname', submission.farmerDetails.lastName),
+          generateRow(6, 'Forename', submission.farmerDetails.firstName),
           generateRow(25, 'Main applicant gender', 'Applicant preferred not to say'),
           generateRow(24, 'Main applicant age', 'Applicant preferred not to say'),
           generateRow(8, 'Address line 1', submission.farmerAddressDetails.address1),
           generateRow(9, 'Address line 2', submission.farmerAddressDetails.address2),
+          generateRow(11, 'Address line 4 (town)', submission.farmerAddressDetails.town),
           generateRow(12, 'Address line 5 (county)', submission.farmerAddressDetails.county),
           generateRow(13, 'Postcode (use capitals)', submission.farmerAddressDetails.postcode),
           generateRow(16, 'Landline number', submission.farmerContactDetails.landline),
           generateRow(17, 'Mobile number', submission.farmerContactDetails.mobile),
           generateRow(18, 'Email', submission.farmerContactDetails.email),
-          generateRow(29, 'Agent Address line 1', submission.agentAddressDetails.address1),
-          generateRow(30, 'Agent Address line 2', submission.agentAddressDetails.address2),
-          generateRow(33, 'Agent Address line 5 (County)', submission.agentAddressDetails.county),
-          generateRow(34, 'Agent Postcode (use capitals)', submission.agentAddressDetails.postcode),
-          generateRow(35, 'Agent Landline number', submission.agentContactDetails.landline),
-          generateRow(36, 'Agent Mobile number', submission.agentContactDetails.mobile),
-          generateRow(37, 'Agent Email', submission.agentContactDetails.email),
+          generateRow(26, 'Agent Surname', submission.agentDetails?.lastName ?? ''),
+          generateRow(27, 'Agent Forename', submission.agentDetails?.firstName ?? ''),
+          generateRow(29, 'Agent Address line 1', submission.agentAddressDetails?.address1 ?? ''),
+          generateRow(30, 'Agent Address line 2', submission.agentAddressDetails?.address2 ?? ''),
+          generateRow(32, 'Agent Address line 4 (town)', submission.agentAddressDetails?.town ?? ''),
+          generateRow(33, 'Agent Address line 5 (County)', submission.agentAddressDetails?.county ?? ''),
+          generateRow(34, 'Agent Postcode (use capitals)', submission.agentAddressDetails?.postcode ?? ''),
+          generateRow(35, 'Agent Landline number', submission.agentContactDetails?.landline ?? ''),
+          generateRow(36, 'Agent Mobile number', submission.agentContactDetails?.mobile ?? ''),
+          generateRow(37, 'Agent Email', submission.agentContactDetails?.email ?? ''),
           generateRow(89, 'Customer is happy to be contacted by us or a third party working on our behalf', submission.consentGiven ? 'Yes' : 'No'),
-          generateRow(368, 'Agent Postcode (use capitals)', todayStr),
+          generateRow(368, 'Date ready for QC or decision', todayStr),
           generateRow(369, 'Eligibility Reference No.', submission.confirmationId),
           generateRow(94, 'Current location of file', 'NA Automated'),
           generateRow(92, 'RAG rating', 'Green'),
           generateRow(93, 'RAG date reviewed ', todayStr),
           generateRow(54, 'Electronic OA received date ', todayStr),
           generateRow(370, 'Status', 'Pending RPA review'),
-          generateRow(371, 'Rationale', 'Eligible, meets priorities, funding available'),
-          generateRow(372, 'Decision maker', 'Online'),
-          generateRow(373, 'Full Application Due Date', (new Date(today.setMonth(today.getMonth() + 6))).toLocaleDateString('en-GB'))
+          generateRow(371, 'Rationale', ''),
+          generateRow(372, 'Decision maker', ''),
+          generateRow(373, 'Full Application Due Date', (new Date(today.setMonth(today.getMonth() + 6))).toLocaleDateString('en-GB')),
+          generateRow(374, 'Customer Marketing Indicator', submission.consentGiven ? 'Yes' : 'No')
         ]
       }
     ]
@@ -141,10 +159,10 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
 function getApplicantEmailDetails (submission, desirabilityScore) {
   return {
     notifyTemplate: emailConfig.notifyTemplate,
-    emailAddress: submission.agentContactDetails.email ?? submission.farmerContactDetails.email,
+    emailAddress: submission.agentContactDetails?.email ?? submission.farmerContactDetails.email,
     details: {
-      firstName: submission.agentDetails.firstName ?? submission.farmerDetails.firstName,
-      lastName: submission.agentDetails.lastName ?? submission.farmerDetails.lastName,
+      firstName: submission.agentDetails?.firstName ?? submission.farmerDetails.firstName,
+      lastName: submission.agentDetails?.lastName ?? submission.farmerDetails.lastName,
       referenceNumber: submission.confirmationId,
       overallRating: desirabilityScore.desirability.overallRating.band,
       crops: submission.farmingType,
@@ -155,7 +173,7 @@ function getApplicantEmailDetails (submission, desirabilityScore) {
       infrastructureEquipment: submission.projectInfrastucture.join(', '),
       irrigationEquipment: submission.projectEquipment.join(', '),
       technology: submission.projectTechnology.join(', '),
-      itemsCost: submission.projectCost,
+      itemsCost: String(submission.projectCost),
       potentialFunding: submission.calculatedGrant,
       remainingCost: submission.remainingCost,
       projectStarted: submission.projectStarted,
@@ -178,7 +196,7 @@ function getApplicantEmailDetails (submission, desirabilityScore) {
       productivityScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'Q19'),
       collaboration: submission.collaboration,
       collaborationScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'Q20'),
-      sssi: submission.sssi
+      sssi: submission.sSSI
     }
   }
 }
