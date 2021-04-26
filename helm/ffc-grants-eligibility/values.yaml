@@ -17,7 +17,7 @@ containerConfigMap:
   name: ffc-grants-eligibility-config-map
 
 containerSecret:
-  name: ffc-demo-eligibility-container-secret
+  name: ffc-grants-eligibility-container-secret
   type: Opaque
 
 deployment:
