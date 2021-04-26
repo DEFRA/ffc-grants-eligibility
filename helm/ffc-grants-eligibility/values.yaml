@@ -8,7 +8,7 @@ labels: {}
 
 appInsights:
   key: not-a-real-key
-  
+
 azureIdentity:
   clientID: not-a-real-clientID
   resourceID: not-a-real-resourceID
@@ -44,7 +44,7 @@ container:
   calculateScoreQueueAddress: calculate-score
   desirabilityScoreSubscriptionAddress: desirability-score-subscription
   desirabilityScoreTopicAddress: desirability-score-topic
-  desirabilitySubmittedTopicAddress: desirability-submitted
+  desirabilitySubmitTopicAddress: desirability-submitted
   redisHostname: redis
   redisPassword: redis
   redisPort: 6379
