@@ -39,6 +39,21 @@ function calculateBusinessSize (employees, turnover) {
   }
 }
 
+function addAgentDetails (agentDetails, agentAddressDetails, agentContactDetails) {
+  return [
+    generateRow(26, 'Agent Surname', agentDetails?.lastName ?? ''),
+    generateRow(27, 'Agent Forename', agentDetails?.firstName ?? ''),
+    generateRow(29, 'Agent Address line 1', agentAddressDetails?.address1 ?? ''),
+    generateRow(30, 'Agent Address line 2', agentAddressDetails?.address2 ?? ''),
+    generateRow(32, 'Agent Address line 4 (town)', agentAddressDetails?.town ?? ''),
+    generateRow(33, 'Agent Address line 5 (County)', agentAddressDetails?.county ?? ''),
+    generateRow(34, 'Agent Postcode (use capitals)', agentAddressDetails?.postcode ?? ''),
+    generateRow(35, 'Agent Landline number', agentContactDetails?.landline ?? ''),
+    generateRow(36, 'Agent Mobile number', agentContactDetails?.mobile ?? ''),
+    generateRow(37, 'Agent Email', agentContactDetails?.email ?? '')
+  ]
+}
+
 function generateExcelFilename (scheme, projectName, businessName, referenceNumber, today) {
   const dateTime = new Intl.DateTimeFormat('en-GB', {
     timeStyle: 'short',
@@ -128,16 +143,6 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(16, 'Landline number', submission.farmerContactDetails.landline),
           generateRow(17, 'Mobile number', submission.farmerContactDetails.mobile),
           generateRow(18, 'Email', submission.farmerContactDetails.email),
-          generateRow(26, 'Agent Surname', submission.agentDetails?.lastName ?? ''),
-          generateRow(27, 'Agent Forename', submission.agentDetails?.firstName ?? ''),
-          generateRow(29, 'Agent Address line 1', submission.agentAddressDetails?.address1 ?? ''),
-          generateRow(30, 'Agent Address line 2', submission.agentAddressDetails?.address2 ?? ''),
-          generateRow(32, 'Agent Address line 4 (town)', submission.agentAddressDetails?.town ?? ''),
-          generateRow(33, 'Agent Address line 5 (County)', submission.agentAddressDetails?.county ?? ''),
-          generateRow(34, 'Agent Postcode (use capitals)', submission.agentAddressDetails?.postcode ?? ''),
-          generateRow(35, 'Agent Landline number', submission.agentContactDetails?.landline ?? ''),
-          generateRow(36, 'Agent Mobile number', submission.agentContactDetails?.mobile ?? ''),
-          generateRow(37, 'Agent Email', submission.agentContactDetails?.email ?? ''),
           generateRow(89, 'Customer is happy to be contacted by us or a third party working on our behalf', submission.consentGiven ? 'Yes' : 'No'),
           generateRow(368, 'Date ready for QC or decision', todayStr),
           generateRow(369, 'Eligibility Reference No.', submission.confirmationId),
@@ -149,7 +154,8 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(371, 'Rationale', ''),
           generateRow(372, 'Decision maker', ''),
           generateRow(373, 'Full Application Due Date', (new Date(today.setMonth(today.getMonth() + 6))).toLocaleDateString('en-GB')),
-          generateRow(374, 'Customer Marketing Indicator', submission.consentGiven ? 'Yes' : 'No')
+          generateRow(374, 'Customer Marketing Indicator', submission.consentGiven ? 'Yes' : 'No'),
+          ...addAgentDetails(submission.agentDetails, submission.agentAddressDetails, submission.agentContactDetails)
         ]
       }
     ]
