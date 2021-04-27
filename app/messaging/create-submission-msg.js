@@ -175,7 +175,7 @@ function getApplicantEmailDetails (submission, desirabilityScore) {
       legalStatus: submission.legalStatus,
       location: `England ${submission.projectPostcode}`,
       landOwnership: submission.landOwnership,
-      tenancyAgreement: submission.tenancyLength,
+      tenancyAgreement: submission.tenancyLength ?? '',
       infrastructureEquipment: submission.projectInfrastucture.join(', '),
       irrigationEquipment: submission.projectEquipment.join(', '),
       technology: submission.projectTechnology.join(', '),
