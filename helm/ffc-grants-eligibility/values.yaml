@@ -8,7 +8,7 @@ labels: {}
 
 appInsights:
   key: not-a-real-key
-  
+
 azureIdentity:
   clientID: not-a-real-clientID
   resourceID: not-a-real-resourceID
@@ -17,7 +17,7 @@ containerConfigMap:
   name: ffc-grants-eligibility-config-map
 
 containerSecret:
-  name: ffc-demo-eligibility-container-secret
+  name: ffc-grants-eligibility-container-secret
   type: Opaque
 
 deployment:
@@ -49,6 +49,10 @@ container:
   redisPassword: redis
   redisPort: 6379
   redisPartition: ffc-grants-eligibility
+  notifyEmailTemplate: dummy-template
+  worksheetProtectPassword: dummy-pwd
+  worksheetProtectEnabled: false
+  worksheetHideEmptyRows: false
 
 livenessProbe:
   path: /healthz

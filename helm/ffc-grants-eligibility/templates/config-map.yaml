@@ -14,4 +14,7 @@ data:
   REDIS_PORT: {{ quote .Values.container.redisPort }}
   REDIS_PARTITION: {{ quote .Values.container.redisPartition }}
   APPINSIGHTS_CLOUDROLE: {{ quote .Values.name }}
+  NOTIFY_EMAIL_TEMPLATE: {{ .Values.container.notifyEmailTemplate | quote }}
+  WORKSHEET_HIDE_EMPTY_ROWS: {{ .Values.container.worksheetHideEmptyRows | quote }}
+  WORKSHEET_PROTECT_ENABLED: {{ .Values.container.worksheetProtectEnabled | quote }}
 {{- end -}}
