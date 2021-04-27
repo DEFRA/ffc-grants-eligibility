@@ -1,6 +1,15 @@
 describe('Create desirability message', () => {
-  const createMsg = require('../../../app/messaging/create-submission-msg')
+  const mockPassword = 'mock-pwd'
+
+  jest.mock('../../../app/config/email', () => ({ notifyTemplate: 'mock-template' }))
+  jest.mock('../../../app/config/spreadsheet', () => ({
+    hideEmptyRows: true,
+    protectEnabled: true,
+    protectPassword: mockPassword
+  }))
+
   const desirabilityScore = require('./desirability-score.json')
+  const createMsg = require('../../../app/messaging/create-submission-msg')
 
   beforeEach(() => {
     jest.resetModules()
@@ -10,7 +19,8 @@ describe('Create desirability message', () => {
     const farmerSubmission = require('./submission-farmer.json')
     const msg = createMsg(farmerSubmission, desirabilityScore)
 
-    // FIXME put some more expects in here
+    expect(msg).toHaveProperty('applicantEmail')
+    expect(msg).toHaveProperty('spreadsheet')
     expect(msg.applicantEmail.emailAddress).toBe(farmerSubmission.farmerContactDetails.email)
   })
 
@@ -18,8 +28,55 @@ describe('Create desirability message', () => {
     const agentSubmission = require('./submission-agent.json')
     const msg = createMsg(agentSubmission, desirabilityScore)
 
-    // FIXME put some more expects in here
+    expect(msg).toHaveProperty('applicantEmail')
+    expect(msg).toHaveProperty('spreadsheet')
     expect(msg.applicantEmail.emailAddress).toBe(agentSubmission.agentContactDetails.email)
+  })
+
+  test('Email part of message should have correct properties', () => {
+    const farmerSubmission = require('./submission-farmer.json')
+    const msg = createMsg(farmerSubmission, desirabilityScore)
+
+    expect(msg.applicantEmail).toHaveProperty('notifyTemplate')
+    expect(msg.applicantEmail).toHaveProperty('emailAddress')
+    expect(msg.applicantEmail).toHaveProperty('details')
+    expect(msg.applicantEmail.details).toHaveProperty(
+      'firstName', 'lastName', 'referenceNumber', 'overallRating', 'crops', 'legalStatus',
+      'location', 'landOwnership', 'tenancyAgreement', 'infrastructureEquipment',
+      'irrigationEquipment', 'technology', 'itemsCost', 'potentialFunding', 'remainingCost',
+      'projectStarted', 'planningPermission', 'abstractionLicence', 'projectName',
+      'projectDetails', 'projectDetailsScore', 'irrigatedCrops', 'irrigatedLandCurrent',
+      'irrigatedLandTarget', 'irrigatedLandScore', 'waterSourceCurrent', 'waterSourcePlanned',
+      'waterSourceScore', 'irrigationCurrent', 'irrigationPlanned', 'irrigationScore',
+      'productivity', 'productivityScore', 'collaboration', 'collaborationScore', 'sssi'
+    )
+  })
+
+  test('Spreadsheet part of message should have correct properties', () => {
+    const agentSubmission = require('./submission-agent.json')
+    const msg = createMsg(agentSubmission, desirabilityScore)
+
+    expect(msg.spreadsheet).toHaveProperty('filename')
+    expect(msg.spreadsheet).toHaveProperty('worksheets')
+    expect(msg.spreadsheet.worksheets.length).toBe(1)
+    expect(msg.spreadsheet.worksheets[0]).toHaveProperty('title')
+    expect(msg.spreadsheet.worksheets[0]).toHaveProperty('hideEmptyRows')
+    expect(msg.spreadsheet.worksheets[0]).toHaveProperty('defaultColumnWidth')
+    expect(msg.spreadsheet.worksheets[0]).toHaveProperty('protectPassword')
+    expect(msg.spreadsheet.worksheets[0]).toHaveProperty('rows')
+    expect(msg.spreadsheet.worksheets[0].rows.length).toBe(82)
+  })
+
+  test('Protect password property should not be set if config is false', () => {
+    jest.mock('../../../app/config/spreadsheet', () => ({
+      hideEmptyRows: true,
+      protectEnabled: false,
+      protectPassword: mockPassword
+    }))
+    const agentSubmission = require('./submission-agent.json')
+    const createSubmissionMsg = require('../../../app/messaging/create-submission-msg')
+    const msg = createSubmissionMsg(agentSubmission, desirabilityScore)
+    expect(msg.spreadsheet.worksheets[0]).not.toHaveProperty('protectPassword')
   })
 
   test('Unknown farming type produces error string', () => {
