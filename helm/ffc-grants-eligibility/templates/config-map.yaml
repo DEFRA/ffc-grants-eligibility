@@ -17,4 +17,5 @@ data:
   NOTIFY_EMAIL_TEMPLATE: {{ .Values.container.notifyEmailTemplate | quote }}
   WORKSHEET_HIDE_EMPTY_ROWS: {{ .Values.container.worksheetHideEmptyRows | quote }}
   WORKSHEET_PROTECT_ENABLED: {{ .Values.container.worksheetProtectEnabled | quote }}
+  EXCEL_UPLOAD_ENVIRONMENT: {{ .Values.container.excelUploadEnvironment | quote }}
 {{- end -}}
