@@ -70,12 +70,13 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
 
   return {
     filename: generateExcelFilename(
-      subScheme,
-      submission.businessDetails.projectName,
-      submission.businessDetails.businessName,
-      submission.confirmationId,
+      subScheme.trim(),
+      submission.businessDetails.projectName.trim(),
+      submission.businessDetails.businessName.trim(),
+      submission.confirmationId.trim(),
       today
     ),
+    uploadLocation: `Farming Investment Fund/Farming Transformation Fund/${spreadsheetConfig.uploadEnvironment}/Water/`,
     worksheets: [
       {
         title: 'DORA DATA',

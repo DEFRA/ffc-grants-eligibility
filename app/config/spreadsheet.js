@@ -4,14 +4,16 @@ const Joi = require('joi')
 const schema = Joi.object({
   hideEmptyRows: Joi.bool().default(false),
   protectEnabled: Joi.bool().default(false),
-  protectPassword: Joi.string()
+  protectPassword: Joi.string(),
+  uploadEnvironment: Joi.string().required()
 })
 
 // Build config
 const config = {
   hideEmptyRows: process.env.WORKSHEET_HIDE_EMPTY_ROWS,
   protectEnabled: process.env.WORKSHEET_PROTECT_ENABLED,
-  protectPassword: process.env.WORKSHEET_PROTECT_PASSWORD
+  protectPassword: process.env.WORKSHEET_PROTECT_PASSWORD,
+  uploadEnvironment: process.env.EXCEL_UPLOAD_ENVIRONMENT
 }
 
 // Validate config
