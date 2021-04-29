@@ -57,6 +57,7 @@ describe('Create desirability message', () => {
     const msg = createMsg(agentSubmission, desirabilityScore)
 
     expect(msg.spreadsheet).toHaveProperty('filename')
+    expect(msg.spreadsheet).toHaveProperty('uploadLocation')
     expect(msg.spreadsheet).toHaveProperty('worksheets')
     expect(msg.spreadsheet.worksheets.length).toBe(1)
     expect(msg.spreadsheet.worksheets[0]).toHaveProperty('title')
@@ -64,7 +65,7 @@ describe('Create desirability message', () => {
     expect(msg.spreadsheet.worksheets[0]).toHaveProperty('defaultColumnWidth')
     expect(msg.spreadsheet.worksheets[0]).toHaveProperty('protectPassword')
     expect(msg.spreadsheet.worksheets[0]).toHaveProperty('rows')
-    expect(msg.spreadsheet.worksheets[0].rows.length).toBe(82)
+    expect(msg.spreadsheet.worksheets[0].rows.length).toBe(84)
   })
 
   test('Protect password property should not be set if config is false', () => {

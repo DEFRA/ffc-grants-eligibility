@@ -70,12 +70,13 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
 
   return {
     filename: generateExcelFilename(
-      subScheme,
-      submission.businessDetails.projectName,
-      submission.businessDetails.businessName,
-      submission.confirmationId,
+      subScheme.trim(),
+      submission.businessDetails.projectName.trim(),
+      submission.businessDetails.businessName.trim(),
+      submission.confirmationId.trim(),
       today
     ),
+    uploadLocation: `Farming Investment Fund/Farming Transformation Fund/${spreadsheetConfig.uploadEnvironment}/Water/`,
     worksheets: [
       {
         title: 'DORA DATA',
@@ -155,6 +156,8 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(372, 'Decision maker', ''),
           generateRow(373, 'Full Application Due Date', (new Date(today.setMonth(today.getMonth() + 6))).toLocaleDateString('en-GB')),
           generateRow(374, 'Customer Marketing Indicator', submission.consentGiven ? 'Yes' : 'No'),
+          generateRow(95, 'Measure table', '99'),
+          generateRow(96, 'Measure year', '99'),
           ...addAgentDetails(submission.agentDetails, submission.agentAddressDetails, submission.agentContactDetails)
         ]
       }
