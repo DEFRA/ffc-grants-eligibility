@@ -54,6 +54,7 @@ container:
   worksheetProtectEnabled: false
   worksheetHideEmptyRows: false
   protectiveMonitoringUrl:
+  excelUploadEnvironment: dummy
 
 livenessProbe:
   path: /healthz

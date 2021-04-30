@@ -1,6 +1,6 @@
 {
   "name": "ffc-grants-eligibility",
-  "version": "2.5.1",
+  "version": "2.5.2",
   "description": "FFC Grants eligibility and desirability microservice",
   "homepage": "https://github.com/DEFRA/ffc-grants-eligibility",
   "main": "app/index.js",
@@ -18,8 +18,10 @@
     "@hapi/catbox-redis": "^6.0.2",
     "@hapi/hapi": "^20.0.3",
     "applicationinsights": "^1.8.10",
-    "ffc-messaging": "^2.1.1",
+    "ffc-messaging": "^2.1.1"
     "ffc-protective-monitoring": "^1.0.0"
+    "ffc-messaging": "^2.1.1",
+    "joi": "^17.4.0"
   },
   "devDependencies": {
     "@hapi/catbox-memory": "^5.0.0",
