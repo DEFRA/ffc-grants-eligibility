@@ -53,6 +53,7 @@ container:
   worksheetProtectPassword: dummy-pwd
   worksheetProtectEnabled: false
   worksheetHideEmptyRows: false
+  protectiveMonitoringUrl:
 
 livenessProbe:
   path: /healthz
