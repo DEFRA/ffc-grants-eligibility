@@ -1,28 +1,22 @@
 const { PublishEvent } = require('ffc-protective-monitoring')
 const config = require('../config/server')
 
-async function sendEvent (request, sessionId, event) {
+async function sendEvent (sessionId, event, pmcCode) {
   const protectiveMonitoring = new PublishEvent(config.protectiveMonitoringUrl)
   await protectiveMonitoring.sendEvent({
     sessionid: sessionId,
     datetime: createEventDate(),
     version: '1.1',
-    application: 'ffc-grants-frontend',
-    component: 'ffc-grants-frontend',
-    ip: getIpAddress(request),
-    pmccode: '001',
+    application: 'FFC-GRANTS',
+    component: 'Desirability Scoring Service',
+    ip: '',
+    pmccode: pmcCode,
     priority: '0',
     details: {
       message: event
     }
   })
   console.log(`Protective monitoring event sent: ${event}`)
-}
-
-function getIpAddress (request) {
-  // Identifying the originating IP address of a client connecting to a web server through an HTTP proxy or a load balancer
-  const xForwardedForHeader = request.headers['x-forwarded-for']
-  return xForwardedForHeader ? xForwardedForHeader.split(',')[0] : request.info.remoteAddress
 }
 
 function createEventDate () {
