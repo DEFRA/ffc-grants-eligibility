@@ -1,4 +1,5 @@
 const cache = require('../cache')
+const appInsights = require('applicationinsights')
 
 module.exports = async function (msg, desirabilityScoreReceiver) {
   try {
@@ -9,6 +10,7 @@ module.exports = async function (msg, desirabilityScoreReceiver) {
   } catch (err) {
     console.error('Unable to process message')
     console.error(err)
+    appInsights.trackException(err)
     await desirabilityScoreReceiver.abandonMessage(msg)
   }
 }
