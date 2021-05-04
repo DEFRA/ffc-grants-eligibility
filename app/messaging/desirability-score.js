@@ -10,7 +10,7 @@ module.exports = async function (msg, desirabilityScoreReceiver) {
   } catch (err) {
     console.error('Unable to process message')
     console.error(err)
-    appInsights.logException(err, msg.correlationId)
+    appInsights.logException(err, msg?.correlationId)
     await desirabilityScoreReceiver.abandonMessage(msg)
   }
 }
