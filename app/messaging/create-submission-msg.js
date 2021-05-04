@@ -168,10 +168,10 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
 function getApplicantEmailDetails (submission, desirabilityScore) {
   return {
     notifyTemplate: emailConfig.notifyTemplate,
-    emailAddress: submission.agentContactDetails?.email ?? submission.farmerContactDetails.email,
+    emailAddress: submission.agentContactDetails?.email ?? submission.farmerContactDetails?.email,
     details: {
-      firstName: submission.agentDetails?.firstName ?? submission.farmerDetails.firstName,
-      lastName: submission.agentDetails?.lastName ?? submission.farmerDetails.lastName,
+      firstName: submission.agentDetails?.firstName ?? submission.farmerDetails?.firstName,
+      lastName: submission.agentDetails?.lastName ?? submission.farmerDetails?.lastName,
       referenceNumber: submission.confirmationId,
       overallRating: desirabilityScore.desirability.overallRating.band,
       crops: submission.farmingType,
@@ -188,7 +188,7 @@ function getApplicantEmailDetails (submission, desirabilityScore) {
       projectStarted: submission.projectStarted,
       planningPermission: submission.planningPermission,
       abstractionLicence: submission.abstractionLicence,
-      projectName: submission.businessDetails.projectName,
+      projectName: submission.businessDetails?.projectName,
       projectDetails: submission.project.join(', '),
       projectDetailsScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'Q14'),
       irrigatedCrops: submission.irrigatedCrops,

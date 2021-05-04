@@ -1,7 +1,7 @@
 const { sendDesirabilitySubmitted } = require('./senders')
 const cache = require('../cache')
 const createMsg = require('./create-submission-msg')
-const appInsights = require('applicationinsights')
+const appInsights = require('../services/app-insights')
 
 module.exports = async function (msg, contactDetailsReceiver) {
   try {
@@ -17,7 +17,7 @@ module.exports = async function (msg, contactDetailsReceiver) {
   } catch (err) {
     console.error('Unable to process message')
     console.error(err)
-    appInsights.trackException(err)
+    appInsights.logException(err, msg.correlationId)
     await contactDetailsReceiver.abandonMessage(msg)
   }
 }
