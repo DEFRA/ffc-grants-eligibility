@@ -10,7 +10,7 @@
         "answers": [
           {
             "key": "Q14",
-            "title": "Project details",
+            "title": "The project will:",
             "input": [
               {
                 "key": "Q14-A4",
@@ -70,7 +70,7 @@
           },
           {
             "key": "Q17b",
-            "title": "Where will the irrigation water come from?",
+            "title": "Where will your irrigation water come from?",
             "input": [
               {
                 "value": "Bore hole / aquifer"
