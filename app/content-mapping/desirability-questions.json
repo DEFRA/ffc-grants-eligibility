@@ -2,7 +2,7 @@
   "Q14": [
     {
       "key": "Q14",
-      "title": "Project details",
+      "title": "The project will:",
       "answers": {
         "Q14-A1": "Change water source",
         "Q14-A2": "Improve irrigation efficiency",
@@ -48,7 +48,7 @@
     },
     {
       "key": "Q17b",
-      "title": "Where will the irrigation water come from?",
+      "title": "Where will your irrigation water come from?",
       "answers": {
         "Q17b-A1": "Peak-flow surface water",
         "Q17b-A2": "Rain water harvesting",
