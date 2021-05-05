@@ -19,18 +19,22 @@ describe('Create desirability message', () => {
     const farmerSubmission = require('./submission-farmer.json')
     const msg = createMsg(farmerSubmission, desirabilityScore)
 
+    expect(msg).toHaveProperty('agentEmail')
     expect(msg).toHaveProperty('applicantEmail')
     expect(msg).toHaveProperty('spreadsheet')
     expect(msg.applicantEmail.emailAddress).toBe(farmerSubmission.farmerContactDetails.email)
+    expect(msg.agentEmail).toBe(null)
   })
 
   test('Agent submission generates correct message payload', () => {
     const agentSubmission = require('./submission-agent.json')
     const msg = createMsg(agentSubmission, desirabilityScore)
 
+    expect(msg).toHaveProperty('agentEmail')
     expect(msg).toHaveProperty('applicantEmail')
     expect(msg).toHaveProperty('spreadsheet')
-    expect(msg.applicantEmail.emailAddress).toBe(agentSubmission.agentContactDetails.email)
+    expect(msg.agentEmail.emailAddress).toBe(agentSubmission.agentContactDetails.email)
+    expect(msg.applicantEmail.emailAddress).toBe(agentSubmission.farmerContactDetails.email)
   })
 
   test('Email part of message should have correct properties', () => {
