@@ -199,7 +199,7 @@ function getEmailDetails (submission, desirabilityScore, notifyTemplate, agentAp
       projectStarted: submission.projectStarted,
       planningPermission: submission.planningPermission,
       abstractionLicence: submission.abstractionLicence,
-      projectName: submission.businessDetails?.projectName,
+      projectName: submission.businessDetails.projectName,
       projectDetails: submission.project.join(', '),
       projectDetailsScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'Q14'),
       irrigatedCrops: submission.irrigatedCrops,

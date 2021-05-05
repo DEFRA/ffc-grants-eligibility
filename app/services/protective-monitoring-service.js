@@ -8,7 +8,7 @@ async function sendEvent (sessionId, event, pmcCode) {
     datetime: createEventDate(),
     version: '1.1',
     application: 'FFC-GRANTS',
-    component: 'Desirability Scoring Service',
+    component: 'Desirability Eligibility Service',
     ip: '',
     pmccode: pmcCode,
     priority: '0',
