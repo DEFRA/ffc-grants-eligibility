@@ -164,16 +164,27 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
     ]
   }
 }
+function getScoreChance (rating) {
+  switch (rating.toLowerCase()) {
+    case 'strong':
+      return 'seems likely to'
+    case 'average':
+      return 'might'
+    default:
+      return 'seems unlikely to'
+  }
+}
 
-function getApplicantEmailDetails (submission, desirabilityScore) {
+function getEmailDetails (submission, desirabilityScore, notifyTemplate, agentApplying) {
   return {
     notifyTemplate: emailConfig.notifyTemplate,
-    emailAddress: submission.agentContactDetails?.email ?? submission.farmerContactDetails?.email,
+    emailAddress: agentApplying ? submission.agentContactDetails.email : submission.farmerContactDetails.email,
     details: {
-      firstName: submission.agentDetails?.firstName ?? submission.farmerDetails?.firstName,
-      lastName: submission.agentDetails?.lastName ?? submission.farmerDetails?.lastName,
+      firstName: agentApplying ? submission.agentDetails.firstName : submission.farmerDetails.firstName,
+      lastName: agentApplying ? submission.agentDetails.lastName : submission.farmerDetails.lastName,
       referenceNumber: submission.confirmationId,
       overallRating: desirabilityScore.desirability.overallRating.band,
+      scoreChance: getScoreChance(desirabilityScore.desirability.overallRating.band),
       crops: submission.farmingType,
       legalStatus: submission.legalStatus,
       location: `England ${submission.projectPostcode}`,
@@ -210,9 +221,22 @@ function getApplicantEmailDetails (submission, desirabilityScore) {
   }
 }
 
+function getAgentEmailDetails (submission, desirabilityScore) {
+  if (submission.applying === 'Agent') {
+    return getEmailDetails(submission, desirabilityScore, emailConfig.notifyTemplate, true)
+  }
+
+  return null
+}
+
+function getApplicantEmailDetails (submission, desirabilityScore) {
+  return getEmailDetails(submission, desirabilityScore, emailConfig.notifyTemplate, false)
+}
+
 module.exports = function (submission, desirabilityScore) {
   return {
     applicantEmail: getApplicantEmailDetails(submission, desirabilityScore),
+    agentEmail: getAgentEmailDetails(submission, desirabilityScore),
     spreadsheet: getSpreadsheetDetails(submission, desirabilityScore)
   }
 }
