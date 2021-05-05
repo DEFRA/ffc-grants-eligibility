@@ -1,5 +1,6 @@
 const { MessageSender } = require('ffc-messaging')
 const msgCfg = require('../config/messaging')
+const protectiveMonitoringServiceSendEvent = require('../services/protective-monitoring-service')
 
 const calculateScoreSender = new MessageSender(msgCfg.calculateScoreQueue)
 const desirabilitySubmittedSender = new MessageSender(msgCfg.desirabilitySubmittedTopic)
@@ -48,5 +49,6 @@ module.exports = {
       msgCfg.desirabilitySubmittedMsgType,
       correlationId
     )
+    await protectiveMonitoringServiceSendEvent(correlationId, 'FTF-DATA-SUBMITTED', '0703')
   }
 }

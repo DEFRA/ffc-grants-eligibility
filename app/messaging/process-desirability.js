@@ -1,7 +1,7 @@
 const { sendCalculateScore } = require('./senders')
 const createMsg = require('./create-desirability-msg')
 const cache = require('../cache')
-
+const appInsights = require('../services/app-insights')
 module.exports = async function (msg, projectDetailsReceiver) {
   try {
     const { body: desirabilityAnswers, correlationId } = msg
@@ -19,6 +19,7 @@ module.exports = async function (msg, projectDetailsReceiver) {
   } catch (err) {
     console.error('Unable to process message')
     console.error(err)
+    appInsights.logException(err, msg?.correlationId)
     await projectDetailsReceiver.abandonMessage(msg)
   }
 }
