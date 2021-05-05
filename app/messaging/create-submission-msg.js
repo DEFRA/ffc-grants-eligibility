@@ -165,7 +165,19 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
   }
 }
 
-function getApplicantEmailDetails (submission, desirabilityScore) {
+function getApplicantEmailDetails(submission, desirabilityScore) {
+  let scoreChance
+        switch (desirabilityScore.desirability.overallRating.band.toLowerCase()) {
+          case 'strong':
+            scoreChance = 'seems likely to'
+            break
+          case 'average':
+            scoreChance = 'might'
+            break
+          default:
+            scoreChance = 'seems unlikely to'
+            break
+        }
   return {
     notifyTemplate: emailConfig.notifyTemplate,
     emailAddress: submission.agentContactDetails?.email ?? submission.farmerContactDetails.email,
@@ -174,6 +186,7 @@ function getApplicantEmailDetails (submission, desirabilityScore) {
       lastName: submission.agentDetails?.lastName ?? submission.farmerDetails.lastName,
       referenceNumber: submission.confirmationId,
       overallRating: desirabilityScore.desirability.overallRating.band,
+      scoreChance: scoreChance,
       crops: submission.farmingType,
       legalStatus: submission.legalStatus,
       location: `England ${submission.projectPostcode}`,
