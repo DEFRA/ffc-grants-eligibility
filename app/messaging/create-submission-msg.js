@@ -164,8 +164,18 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
     ]
   }
 }
+function getScoreChance(rating) {
+  switch (rating.toLowerCase()) {
+    case 'strong':
+      return 'seems likely to'
+    case 'average':
+      return 'might'
+    default:
+    return 'seems unlikely to'
+  }
+}
 
-function getApplicantEmailDetails (submission, desirabilityScore) {
+function getApplicantEmailDetails(submission, desirabilityScore) {
   return {
     notifyTemplate: emailConfig.notifyTemplate,
     emailAddress: submission.agentContactDetails?.email ?? submission.farmerContactDetails.email,
@@ -174,6 +184,7 @@ function getApplicantEmailDetails (submission, desirabilityScore) {
       lastName: submission.agentDetails?.lastName ?? submission.farmerDetails.lastName,
       referenceNumber: submission.confirmationId,
       overallRating: desirabilityScore.desirability.overallRating.band,
+      scoreChance: getScoreChance(desirabilityScore.desirability.overallRating.band),
       crops: submission.farmingType,
       legalStatus: submission.legalStatus,
       location: `England ${submission.projectPostcode}`,
