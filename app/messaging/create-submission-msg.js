@@ -69,9 +69,6 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
   const todayStr = today.toLocaleDateString('en-GB')
   const subScheme = 'FTF-Water'
 
-  console.log(submission.consentOptional)
-  console.log(submission.consentOptional ? 'Yes' : 'No')
-
   return {
     filename: generateExcelFilename(
       subScheme.trim(),
