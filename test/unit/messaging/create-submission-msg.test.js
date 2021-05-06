@@ -1,4 +1,4 @@
-describe('Create desirability message', () => {
+describe('Create submission message', () => {
   const mockPassword = 'mock-pwd'
 
   jest.mock('../../../app/config/email', () => ({ notifyTemplate: 'mock-template' }))
@@ -69,7 +69,7 @@ describe('Create desirability message', () => {
     expect(msg.spreadsheet.worksheets[0]).toHaveProperty('defaultColumnWidth')
     expect(msg.spreadsheet.worksheets[0]).toHaveProperty('protectPassword')
     expect(msg.spreadsheet.worksheets[0]).toHaveProperty('rows')
-    expect(msg.spreadsheet.worksheets[0].rows.length).toBe(84)
+    expect(msg.spreadsheet.worksheets[0].rows.length).toBe(85)
   })
 
   test('Protect password property should not be set if config is false', () => {
