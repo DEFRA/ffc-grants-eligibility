@@ -50,7 +50,8 @@ function addAgentDetails (agentDetails, agentAddressDetails, agentContactDetails
     generateRow(34, 'Agent Postcode (use capitals)', agentAddressDetails?.postcode ?? ''),
     generateRow(35, 'Agent Landline number', agentContactDetails?.landline ?? ''),
     generateRow(36, 'Agent Mobile number', agentContactDetails?.mobile ?? ''),
-    generateRow(37, 'Agent Email', agentContactDetails?.email ?? '')
+    generateRow(37, 'Agent Email', agentContactDetails?.email ?? ''),
+    generateRow(28, 'Agent business name', 'Dummy Business Name')
   ]
 }
 
@@ -144,7 +145,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(16, 'Landline number', submission.farmerContactDetails.landline),
           generateRow(17, 'Mobile number', submission.farmerContactDetails.mobile),
           generateRow(18, 'Email', submission.farmerContactDetails.email),
-          generateRow(89, 'Customer is happy to be contacted by us or a third party working on our behalf', submission.consentGiven ? 'Yes' : 'No'),
+          generateRow(89, 'Customer is happy to be contacted by us or a third party working on our behalf', submission.consentMain ? 'Yes' : 'No'),
           generateRow(368, 'Date ready for QC or decision', todayStr),
           generateRow(369, 'Eligibility Reference No.', submission.confirmationId),
           generateRow(94, 'Current location of file', 'NA Automated'),
@@ -155,7 +156,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(371, 'Rationale', ''),
           generateRow(372, 'Decision maker', ''),
           generateRow(373, 'Full Application Due Date', (new Date(today.setMonth(today.getMonth() + 6))).toLocaleDateString('en-GB')),
-          generateRow(374, 'Customer Marketing Indicator', submission.consentGiven ? 'Yes' : 'No'),
+          generateRow(374, 'Customer Marketing Indicator', submission.consentOptional ? 'Yes' : 'No'),
           generateRow(95, 'Measure table', '99'),
           generateRow(96, 'Measure year', '99'),
           ...addAgentDetails(submission.agentDetails, submission.agentAddressDetails, submission.agentContactDetails)
@@ -164,6 +165,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
     ]
   }
 }
+
 function getScoreChance (rating) {
   switch (rating.toLowerCase()) {
     case 'strong':
