@@ -145,7 +145,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(16, 'Landline number', submission.farmerContactDetails.landline),
           generateRow(17, 'Mobile number', submission.farmerContactDetails.mobile),
           generateRow(18, 'Email', submission.farmerContactDetails.email),
-          generateRow(89, 'Customer is happy to be contacted by us or a third party working on our behalf', submission.consentGiven ? 'Yes' : 'No'),
+          generateRow(89, 'Customer is happy to be contacted by us or a third party working on our behalf', submission.consentMain ? 'Yes' : 'No'),
           generateRow(368, 'Date ready for QC or decision', todayStr),
           generateRow(369, 'Eligibility Reference No.', submission.confirmationId),
           generateRow(94, 'Current location of file', 'NA Automated'),
