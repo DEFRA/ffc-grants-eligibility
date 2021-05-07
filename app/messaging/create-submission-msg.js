@@ -159,6 +159,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(374, 'Customer Marketing Indicator', submission.consentOptional ? 'Yes' : 'No'),
           generateRow(95, 'Measure table', '99'),
           generateRow(96, 'Measure year', '99'),
+          generateRow(375, 'OA percent', String(desirabilityScore.desirability.overallRating.score)),
           ...addAgentDetails(submission.agentDetails, submission.agentAddressDetails, submission.agentContactDetails)
         ]
       }
