@@ -155,7 +155,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(370, 'Status', 'Pending RPA review'),
           generateRow(371, 'Rationale', ''),
           generateRow(372, 'Decision maker', ''),
-          generateRow(373, 'Full Application Due Date', (new Date(today.setMonth(today.getMonth() + 6))).toLocaleDateString('en-GB')),
+          generateRow(85, 'Full Application Submission Date', (new Date(today.setMonth(today.getMonth() + 6))).toLocaleDateString('en-GB')),
           generateRow(374, 'Customer Marketing Indicator', submission.consentOptional ? 'Yes' : 'No'),
           generateRow(95, 'Measure table', '99'),
           generateRow(96, 'Measure year', '99'),
