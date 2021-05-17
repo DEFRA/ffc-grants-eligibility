@@ -100,7 +100,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(343, 'Tenancy for next 5 years', submission.tenancyLength ?? ''),
           generateRow(344, 'Irrigation Infrastructure ', submission.projectItemsList.join('|')),
           generateRow(55, 'Total project expenditure', String(submission.projectCost)),
-          generateRow(57, 'Grant rate', '40%'),
+          generateRow(57, 'Grant rate', '40'),
           generateRow(56, 'Grant amount requested', submission.calculatedGrant),
           generateRow(345, 'Remaining Cost to Farmer', submission.remainingCost),
           generateRow(346, 'Planning Permission Status', submission.planningPermission),
