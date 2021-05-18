@@ -179,7 +179,6 @@ function getScoreChance (rating) {
 }
 
 function getEmailDetails(submission, desirabilityScore, notifyTemplate, agentApplying) {
-  const today = new Date()
   return {
     notifyTemplate: emailConfig.notifyTemplate,
     emailAddress: agentApplying ? submission.agentContactDetails.email : submission.farmerContactDetails.email,
@@ -224,12 +223,12 @@ function getEmailDetails(submission, desirabilityScore, notifyTemplate, agentApp
       businessName: submission.businessDetails.businessName,
       farmerName: submission.farmerDetails.firstName,
       farmerSurname: submission.farmerDetails.lastName,
-      agentName: submission.agentDetails.firstName ?? 'N/A',
-      agentSurname: submission.agentDetails.lastName ?? ' ',
+      agentName: submission.agentDetails?.firstName ?? 'N/A',
+      agentSurname: submission.agentDetails?.lastName ?? ' ',
       farmerEmail: submission.farmerContactDetails.email,
-      agentEmail: submission.agentContactDetails.email ?? 'N/A',
+      agentEmail: submission.agentContactDetails?.email ?? 'N/A',
       contactConsent: submission.consentOptional ? 'Yes' : 'No',
-      scoreDate: (new Date(today.setMonth(today.getMonth() + 6))).toLocaleDateString('en-GB')
+      scoreDate: new Date.toLocaleDateString('en-GB')
 
     }
   }
