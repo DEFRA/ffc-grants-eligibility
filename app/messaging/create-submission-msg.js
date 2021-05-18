@@ -228,7 +228,7 @@ function getEmailDetails(submission, desirabilityScore, notifyTemplate, agentApp
       farmerEmail: submission.farmerContactDetails.email,
       agentEmail: submission.agentContactDetails?.email ?? 'N/A',
       contactConsent: submission.consentOptional ? 'Yes' : 'No',
-      scoreDate: new Date.toLocaleDateString('en-GB')
+      scoreDate: new Date().toLocaleDateString('en-GB')
 
     }
   }
