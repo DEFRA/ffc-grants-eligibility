@@ -178,7 +178,7 @@ function getScoreChance (rating) {
   }
 }
 
-function getEmailDetails (submission, desirabilityScore, notifyTemplate, agentApplying) {
+function getEmailDetails(submission, desirabilityScore, notifyTemplate, agentApplying) {
   return {
     notifyTemplate: emailConfig.notifyTemplate,
     emailAddress: agentApplying ? submission.agentContactDetails.email : submission.farmerContactDetails.email,
@@ -219,7 +219,17 @@ function getEmailDetails (submission, desirabilityScore, notifyTemplate, agentAp
       productivityScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'Q19'),
       collaboration: submission.collaboration,
       collaborationScore: getQuestionScoreBand(desirabilityScore.desirability.questions, 'Q20'),
-      sssi: submission.sSSI
+      sssi: submission.sSSI,
+      businessName: submission.businessDetails.businessName,
+      farmerName: submission.farmerDetails.firstName,
+      farmerSurname: submission.farmerDetails.lastName,
+      agentName: submission.agentDetails?.firstName ?? 'N/A',
+      agentSurname: submission.agentDetails?.lastName ?? ' ',
+      farmerEmail: submission.farmerContactDetails.email,
+      agentEmail: submission.agentContactDetails?.email ?? 'N/A',
+      contactConsent: submission.consentOptional ? 'Yes' : 'No',
+      scoreDate: new Date().toLocaleDateString('en-GB')
+
     }
   }
 }
