@@ -192,7 +192,7 @@ function getEmailDetails (submission, desirabilityScore, notifyTemplate, agentAp
       legalStatus: submission.legalStatus,
       location: `England ${submission.projectPostcode}`,
       landOwnership: submission.landOwnership,
-      tenancyAgreement: submission.tenancyLength ?? '',
+      tenancyAgreement: submission.tenancyLength ?? 'N/A',
       infrastructureEquipment: submission.projectInfrastucture.join(', '),
       irrigationEquipment: submission.projectEquipment.join(', '),
       technology: submission.projectTechnology.join(', '),
