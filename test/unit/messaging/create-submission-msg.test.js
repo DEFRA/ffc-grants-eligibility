@@ -52,7 +52,9 @@ describe('Create submission message', () => {
       'projectDetails', 'projectDetailsScore', 'irrigatedCrops', 'irrigatedLandCurrent',
       'irrigatedLandTarget', 'irrigatedLandScore', 'waterSourceCurrent', 'waterSourcePlanned',
       'waterSourceScore', 'irrigationCurrent', 'irrigationPlanned', 'irrigationScore',
-      'productivity', 'productivityScore', 'collaboration', 'collaborationScore', 'sssi'
+      'productivity', 'productivityScore', 'collaboration', 'collaborationScore', 'sssi', 'businessName',
+      'farmerName', 'farmerSurname', 'agentName', 'agentSurname', 'farmerEmail', 'agentEmail',
+      'contactConsent', 'scoreDate'
     )
   })
 

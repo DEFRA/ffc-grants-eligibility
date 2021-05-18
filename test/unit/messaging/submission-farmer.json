@@ -2,8 +2,16 @@
   "confirmationId": "WM-CE7-201",
   "abstractionLicence": "Expected to have by 31st December 2021",
   "agentAddressDetails": null,
-  "agentContactDetails": null,
-  "agentDetails": null,
+  "agentContactDetails": {
+    "email": "me@me.com",
+    "landline": "",
+    "mobile": "09971 554024"
+  },
+  "agentDetails": {
+    "title": "Mr",
+    "firstName": "James",
+    "lastName": "Bond"
+  },
   "applying": "Farmer",
   "isArable": null,
   "businessDetails": {
@@ -88,4 +96,5 @@
   "tenancyLength": null,
   "landOwnership": "Yes",
   "sSSI": "Yes"
+
 }
