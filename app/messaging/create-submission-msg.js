@@ -178,7 +178,7 @@ function getScoreChance (rating) {
   }
 }
 
-function getEmailDetails(submission, desirabilityScore, notifyTemplate, agentApplying) {
+function getEmailDetails (submission, desirabilityScore, notifyTemplate, agentApplying) {
   return {
     notifyTemplate: emailConfig.notifyTemplate,
     emailAddress: agentApplying ? submission.agentContactDetails.email : submission.farmerContactDetails.email,
