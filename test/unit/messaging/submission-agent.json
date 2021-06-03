@@ -1,22 +1,19 @@
 {
   "confirmationId": "WM-71A-79E",
   "abstractionLicence": "Expected to have by 31st December 2021",
-  "agentAddressDetails": {
+  "agentDetails": {
+    "title": "Mr",
+    "firstName": "Geoff",
+    "lastName": "Hopkin",
+    "businessName": "My Farm Business",
+    "email": "me@me.com",
+    "landline": "",
+    "mobile": "08765 443322",
     "address1": "88 The Street",
     "address2": "",
     "town": "Newcastle",
     "county": "Tyne And Wear",
     "postcode": "AB12 7YY"
-  },
-  "agentContactDetails": {
-    "email": "me@me.com",
-    "landline": "",
-    "mobile": "08765 443322"
-  },
-  "agentDetails": {
-    "title": "Mr",
-    "firstName": "Geoff",
-    "lastName": "Hopkin"
   },
   "applying": "Agent",
   "isArable": null,

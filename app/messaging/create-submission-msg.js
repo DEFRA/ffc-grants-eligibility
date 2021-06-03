@@ -39,19 +39,19 @@ function calculateBusinessSize (employees, turnover) {
   }
 }
 
-function addAgentDetails (agentDetails, agentAddressDetails, agentContactDetails) {
+function addAgentDetails (agentDetails) {
   return [
     generateRow(26, 'Agent Surname', agentDetails?.lastName ?? ''),
     generateRow(27, 'Agent Forename', agentDetails?.firstName ?? ''),
-    generateRow(29, 'Agent Address line 1', agentAddressDetails?.address1 ?? ''),
-    generateRow(30, 'Agent Address line 2', agentAddressDetails?.address2 ?? ''),
-    generateRow(32, 'Agent Address line 4 (town)', agentAddressDetails?.town ?? ''),
-    generateRow(33, 'Agent Address line 5 (County)', agentAddressDetails?.county ?? ''),
-    generateRow(34, 'Agent Postcode (use capitals)', agentAddressDetails?.postcode ?? ''),
-    generateRow(35, 'Agent Landline number', agentContactDetails?.landline ?? ''),
-    generateRow(36, 'Agent Mobile number', agentContactDetails?.mobile ?? ''),
-    generateRow(37, 'Agent Email', agentContactDetails?.email ?? ''),
-    generateRow(28, 'Agent business name', 'Dummy Business Name')
+    generateRow(29, 'Agent Address line 1', agentDetails?.address1 ?? ''),
+    generateRow(30, 'Agent Address line 2', agentDetails?.address2 ?? ''),
+    generateRow(32, 'Agent Address line 4 (town)', agentDetails?.town ?? ''),
+    generateRow(33, 'Agent Address line 5 (County)', agentDetails?.county ?? ''),
+    generateRow(34, 'Agent Postcode (use capitals)', agentDetails?.postcode ?? ''),
+    generateRow(35, 'Agent Landline number', agentDetails?.landline ?? ''),
+    generateRow(36, 'Agent Mobile number', agentDetails?.mobile ?? ''),
+    generateRow(37, 'Agent Email', agentDetails?.email ?? ''),
+    generateRow(28, 'Agent business name', addAgentDetails?.businessName)
   ]
 }
 
@@ -159,7 +159,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(95, 'Measure table', '99'),
           generateRow(96, 'Measure year', '99'),
           generateRow(375, 'OA percent', String(desirabilityScore.desirability.overallRating.score)),
-          ...addAgentDetails(submission.agentDetails, submission.agentAddressDetails, submission.agentContactDetails)
+          ...addAgentDetails(submission.agentDetails)
         ]
       }
     ]
@@ -180,7 +180,7 @@ function getScoreChance (rating) {
 function getEmailDetails (submission, desirabilityScore, notifyTemplate, agentApplying) {
   return {
     notifyTemplate: emailConfig.notifyTemplate,
-    emailAddress: agentApplying ? submission.agentContactDetails.email : submission.farmerContactDetails.email,
+    emailAddress: agentApplying ? submission.agentDetails.email : submission.farmerContactDetails.email,
     details: {
       firstName: agentApplying ? submission.agentDetails.firstName : submission.farmerDetails.firstName,
       lastName: agentApplying ? submission.agentDetails.lastName : submission.farmerDetails.lastName,
@@ -225,7 +225,7 @@ function getEmailDetails (submission, desirabilityScore, notifyTemplate, agentAp
       agentName: submission.agentDetails?.firstName ?? 'N/A',
       agentSurname: submission.agentDetails?.lastName ?? ' ',
       farmerEmail: submission.farmerContactDetails.email,
-      agentEmail: submission.agentContactDetails?.email ?? 'N/A',
+      agentEmail: submission.agentDetails?.email ?? 'N/A',
       contactConsent: submission.consentOptional ? 'Yes' : 'No',
       scoreDate: new Date().toLocaleDateString('en-GB')
 
