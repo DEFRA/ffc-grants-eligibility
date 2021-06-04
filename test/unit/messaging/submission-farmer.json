@@ -18,22 +18,18 @@
   "emailAddress": null,
   "inEngland": "Yes",
   "projectPostcode": "AB12 4QQ",
-  "farmerAddressDetails": {
+  "farmerDetails": {
+    "title": "Mr",
+    "firstName": "Geoff",
+    "lastName": "Hopkin",
+    "email": "me@me.com",
+    "landline": "",
+    "mobile": "08871 554024",
     "address1": "123 Road",
     "address2": "",
     "town": "York",
     "county": "North Yorkshire",
     "postcode": "YO33 4FF"
-  },
-  "farmerContactDetails": {
-    "email": "me@me.com",
-    "landline": "",
-    "mobile": "08871 554024"
-  },
-  "farmerDetails": {
-    "title": "Mr",
-    "firstName": "Geoff",
-    "lastName": "Hopkin"
   },
   "farmingType": "Crops for the food industry",
   "irrigatedCrops": "Field-scale crops",

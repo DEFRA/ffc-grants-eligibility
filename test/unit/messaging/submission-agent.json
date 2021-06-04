@@ -31,22 +31,18 @@
   "emailAddress": null,
   "inEngland": "Yes",
   "projectPostcode": "EC1A 1BB",
-  "farmerAddressDetails": {
+  "farmerDetails": {
+    "title": "Mrs",
+    "firstName": "Mary",
+    "lastName": "Jones",
+    "email": "test@test.com",
+    "landline": "01888 123665",
+    "mobile": "08870 554024",
     "address1": "123 Road",
     "address2": "Fulford",
     "town": "York",
     "county": "North Yorkshire",
     "postcode": "YO33 4FF"
-  },
-  "farmerContactDetails": {
-    "email": "test@test.com",
-    "landline": "01888 123665",
-    "mobile": "08870 554024"
-  },
-  "farmerDetails": {
-    "title": "Mrs",
-    "firstName": "Mary",
-    "lastName": "Jones"
   },
   "farmingType": "Horticulture (including ornamentals)",
   "irrigatedCrops": "Fruit",

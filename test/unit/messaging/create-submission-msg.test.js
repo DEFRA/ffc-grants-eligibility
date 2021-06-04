@@ -22,7 +22,7 @@ describe('Create submission message', () => {
     expect(msg).toHaveProperty('agentEmail')
     expect(msg).toHaveProperty('applicantEmail')
     expect(msg).toHaveProperty('spreadsheet')
-    expect(msg.applicantEmail.emailAddress).toBe(farmerSubmission.farmerContactDetails.email)
+    expect(msg.applicantEmail.emailAddress).toBe(farmerSubmission.farmerDetails.email)
     expect(msg.agentEmail).toBe(null)
   })
 
@@ -34,7 +34,7 @@ describe('Create submission message', () => {
     expect(msg).toHaveProperty('applicantEmail')
     expect(msg).toHaveProperty('spreadsheet')
     expect(msg.agentEmail.emailAddress).toBe(agentSubmission.agentDetails.email)
-    expect(msg.applicantEmail.emailAddress).toBe(agentSubmission.farmerContactDetails.email)
+    expect(msg.applicantEmail.emailAddress).toBe(agentSubmission.farmerDetails.email)
   })
 
   test('Email part of message should have correct properties', () => {
