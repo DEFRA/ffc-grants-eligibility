@@ -224,6 +224,7 @@ function getEmailDetails (submission, desirabilityScore, notifyTemplate, agentAp
       farmerSurname: submission.farmerDetails.lastName,
       agentName: submission.agentDetails?.firstName ?? 'N/A',
       agentSurname: submission.agentDetails?.lastName ?? ' ',
+      agentBusinessName: submission.agentDetails?.businessName ?? 'N/A',
       farmerEmail: submission.farmerDetails.email,
       agentEmail: submission.agentDetails?.email ?? 'N/A',
       contactConsent: submission.consentOptional ? 'Yes' : 'No',
