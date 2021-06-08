@@ -51,7 +51,7 @@ function addAgentDetails (agentDetails) {
     generateRow(35, 'Agent Landline number', agentDetails?.landline ?? ''),
     generateRow(36, 'Agent Mobile number', agentDetails?.mobile ?? ''),
     generateRow(37, 'Agent Email', agentDetails?.email ?? ''),
-    generateRow(28, 'Agent business name', addAgentDetails?.businessName)
+    generateRow(28, 'Agent Business Name', addAgentDetails?.businessName)
   ]
 }
 
