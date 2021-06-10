@@ -256,7 +256,7 @@ module.exports = function (submission, desirabilityScore) {
   return {
     applicantEmail: getApplicantEmailDetails(submission, desirabilityScore),
     agentEmail: getAgentEmailDetails(submission, desirabilityScore),
-    rpaEmail: process.env.NODE_ENV === 'production' ? getRPAEmailDetails(submission, desirabilityScore): null,
+    rpaEmail: process.env.NODE_ENV === 'production' ? getRPAEmailDetails(submission, desirabilityScore): '',
     spreadsheet: getSpreadsheetDetails(submission, desirabilityScore)
   }
 }
