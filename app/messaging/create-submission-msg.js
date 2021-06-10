@@ -39,7 +39,7 @@ function calculateBusinessSize (employees, turnover) {
   }
 }
 
-function addAgentDetails (agentDetails) {
+function addAgentDetails(agentDetails) {
   return [
     generateRow(26, 'Agent Surname', agentDetails?.lastName ?? ''),
     generateRow(27, 'Agent Forename', agentDetails?.firstName ?? ''),
@@ -51,7 +51,7 @@ function addAgentDetails (agentDetails) {
     generateRow(35, 'Agent Landline number', agentDetails?.landline ?? ''),
     generateRow(36, 'Agent Mobile number', agentDetails?.mobile ?? ''),
     generateRow(37, 'Agent Email', agentDetails?.email ?? ''),
-    generateRow(28, 'Agent Business Name', addAgentDetails?.businessName)
+    generateRow(28, 'Agent Business Name', agentDetails?.businessName ?? '')
   ]
 }
 
@@ -177,16 +177,18 @@ function getScoreChance (rating) {
   }
 }
 
-function getEmailDetails (submission, desirabilityScore, notifyTemplate, agentApplying) {
+
+function getEmailDetails(submission, desirabilityScore, notifyTemplate, agentApplying, rpaEmail) {
+  const email = agentApplying ? submission.agentDetails.email : submission.farmerDetails.email
   return {
     notifyTemplate: emailConfig.notifyTemplate,
-    emailAddress: agentApplying ? submission.agentDetails.email : submission.farmerDetails.email,
+    emailAddress: rpaEmail ? 'FTF@rpa.gov.uk' : email ,
     details: {
       firstName: agentApplying ? submission.agentDetails.firstName : submission.farmerDetails.firstName,
       lastName: agentApplying ? submission.agentDetails.lastName : submission.farmerDetails.lastName,
       referenceNumber: submission.confirmationId,
       overallRating: desirabilityScore.desirability.overallRating.band,
-      scoreChance: getScoreChance(desirabilityScore.desirability.overallRating.band),
+      scoreChance: getScoreChance (desirabilityScore.desirability.overallRating.band),
       crops: submission.farmingType,
       legalStatus: submission.legalStatus,
       location: `England ${submission.projectPostcode}`,
@@ -236,20 +238,25 @@ function getEmailDetails (submission, desirabilityScore, notifyTemplate, agentAp
 
 function getAgentEmailDetails (submission, desirabilityScore) {
   if (submission.applying === 'Agent') {
-    return getEmailDetails(submission, desirabilityScore, emailConfig.notifyTemplate, true)
+    return getEmailDetails(submission, desirabilityScore, emailConfig.notifyTemplate, true, false)
   }
 
   return null
 }
 
 function getApplicantEmailDetails (submission, desirabilityScore) {
-  return getEmailDetails(submission, desirabilityScore, emailConfig.notifyTemplate, false)
+  return getEmailDetails(submission, desirabilityScore, emailConfig.notifyTemplate, false, false)
+}
+
+function getRPAEmailDetails (submission, desirabilityScore) {
+  return getEmailDetails(submission, desirabilityScore, emailConfig.notifyTemplate, false, true)
 }
 
 module.exports = function (submission, desirabilityScore) {
   return {
     applicantEmail: getApplicantEmailDetails(submission, desirabilityScore),
     agentEmail: getAgentEmailDetails(submission, desirabilityScore),
+    rpaEmail: getRPAEmailDetails(submission, desirabilityScore),
     spreadsheet: getSpreadsheetDetails(submission, desirabilityScore)
   }
 }
