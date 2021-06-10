@@ -1,5 +1,7 @@
 describe('Create submission message', () => {
   const mockPassword = 'mock-pwd'
+  const OLD_ENV = process.env;
+
 
   jest.mock('../../../app/config/email', () => ({ notifyTemplate: 'mock-template' }))
   jest.mock('../../../app/config/spreadsheet', () => ({
@@ -13,9 +15,11 @@ describe('Create submission message', () => {
 
   beforeEach(() => {
     jest.resetModules()
+    process.env = { ...OLD_ENV }
   })
 
   test('Farmer submission generates correct message payload', () => {
+    process.env.NODE_ENV = 'production';
     const farmerSubmission = require('./submission-farmer.json')
     const msg = createMsg(farmerSubmission, desirabilityScore)
 
@@ -29,6 +33,7 @@ describe('Create submission message', () => {
   })
 
   test('Agent submission generates correct message payload', () => {
+    process.env.NODE_ENV = 'production';
     const agentSubmission = require('./submission-agent.json')
     const msg = createMsg(agentSubmission, desirabilityScore)
 

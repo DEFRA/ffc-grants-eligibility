@@ -182,7 +182,7 @@ function getEmailDetails(submission, desirabilityScore, notifyTemplate, agentApp
   const email = agentApplying ? submission.agentDetails.email : submission.farmerDetails.email
   return {
     notifyTemplate: emailConfig.notifyTemplate,
-    emailAddress: rpaEmail ? 'FTF@rpa.gov.uk' : email ,
+    emailAddress: rpaEmail ? rpaEmail : email ,
     details: {
       firstName: agentApplying ? submission.agentDetails.firstName : submission.farmerDetails.firstName,
       lastName: agentApplying ? submission.agentDetails.lastName : submission.farmerDetails.lastName,
@@ -249,14 +249,14 @@ function getApplicantEmailDetails (submission, desirabilityScore) {
 }
 
 function getRPAEmailDetails (submission, desirabilityScore) {
-  return getEmailDetails(submission, desirabilityScore, emailConfig.notifyTemplate, false, true)
+  return getEmailDetails(submission, desirabilityScore, emailConfig.notifyTemplate, false, 'FTF@rpa.gov.uk')
 }
 
 module.exports = function (submission, desirabilityScore) {
   return {
     applicantEmail: getApplicantEmailDetails(submission, desirabilityScore),
     agentEmail: getAgentEmailDetails(submission, desirabilityScore),
-    rpaEmail: getRPAEmailDetails(submission, desirabilityScore),
+    rpaEmail: process.env.NODE_ENV === 'production' ? getRPAEmailDetails(submission, desirabilityScore): null,
     spreadsheet: getSpreadsheetDetails(submission, desirabilityScore)
   }
 }
