@@ -249,7 +249,7 @@ function getApplicantEmailDetails (submission, desirabilityScore) {
 }
 
 function getRPAEmailDetails (submission, desirabilityScore) {
-  return getEmailDetails(submission, desirabilityScore, emailConfig.notifyTemplate, false, 'FTF@rpa.gov.uk')
+  return getEmailDetails(submission, desirabilityScore, emailConfig.notifyTemplate, false, spreadsheetConfig.rpaEmail)
 }
 
 module.exports = function (submission, desirabilityScore) {

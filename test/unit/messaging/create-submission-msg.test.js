@@ -7,6 +7,7 @@ describe('Create submission message', () => {
     hideEmptyRows: true,
     protectEnabled: true,
     sendEmailToRpa: true,
+    rpaEmail: 'FTF@rpa.gov.uk',
     protectPassword: mockPassword
   }))
 

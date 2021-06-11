@@ -57,6 +57,7 @@ container:
   worksheetProtectPassword: dummy-pwd
   worksheetProtectEnabled: false
   sendEmailToRpa: false
+  rpaEmail: FTF@rpa.gov.uk
   worksheetHideEmptyRows: false
   protectiveMonitoringUrl:
   excelUploadEnvironment: dummy
