@@ -1,12 +1,12 @@
 describe('Create submission message', () => {
   const mockPassword = 'mock-pwd'
-  const OLD_ENV = process.env;
 
 
   jest.mock('../../../app/config/email', () => ({ notifyTemplate: 'mock-template' }))
   jest.mock('../../../app/config/spreadsheet', () => ({
     hideEmptyRows: true,
     protectEnabled: true,
+    sendEmailToRpa: true,
     protectPassword: mockPassword
   }))
 
@@ -15,11 +15,9 @@ describe('Create submission message', () => {
 
   beforeEach(() => {
     jest.resetModules()
-    process.env = { ...OLD_ENV }
   })
 
   test('Farmer submission generates correct message payload', () => {
-    process.env.NODE_ENV = 'production';
     const farmerSubmission = require('./submission-farmer.json')
     const msg = createMsg(farmerSubmission, desirabilityScore)
 
@@ -32,8 +30,25 @@ describe('Create submission message', () => {
     expect(msg.agentEmail).toBe(null)
   })
 
+  test('Farmer submission generates message payload without RPA email when config is Flase', () => {
+    const farmerSubmission = require('./submission-farmer.json')
+    const msg = createMsg(farmerSubmission, desirabilityScore)
+    jest.mock('../../../app/config/spreadsheet', () => ({
+      hideEmptyRows: true,
+      protectEnabled: false,
+      sendEmailToRpa: false,
+      protectPassword: mockPassword
+    }))
+    expect(msg).toHaveProperty('agentEmail')
+    expect(msg).toHaveProperty('applicantEmail')
+    expect(msg).toHaveProperty('rpaEmail')
+    expect(msg).toHaveProperty('spreadsheet')
+    expect(msg.applicantEmail.emailAddress).toBe(farmerSubmission.farmerDetails.email)
+    expect(msg.rpaEmail.emailAddress).toBeFalsy
+    expect(msg.agentEmail).toBe(null)
+  })
+
   test('Agent submission generates correct message payload', () => {
-    process.env.NODE_ENV = 'production';
     const agentSubmission = require('./submission-agent.json')
     const msg = createMsg(agentSubmission, desirabilityScore)
 
@@ -89,6 +104,7 @@ describe('Create submission message', () => {
     jest.mock('../../../app/config/spreadsheet', () => ({
       hideEmptyRows: true,
       protectEnabled: false,
+      sendEmailToRpa: false,
       protectPassword: mockPassword
     }))
     const agentSubmission = require('./submission-agent.json')

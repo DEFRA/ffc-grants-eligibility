@@ -1,3 +1,10 @@
+const mockPassword = 'mock-pwd'
+jest.mock('../../../app/config/spreadsheet', () => ({
+  hideEmptyRows: true,
+  protectEnabled: true,
+  sendEmailToRpa: true,
+  protectPassword: mockPassword
+}))
 jest.mock('../../../app/cache')
 jest.mock('../../../app/services/app-insights')
 const desirabilityScore = require('../../../app/messaging/desirability-score')
