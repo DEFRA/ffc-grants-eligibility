@@ -249,14 +249,14 @@ function getApplicantEmailDetails (submission, desirabilityScore) {
 }
 
 function getRPAEmailDetails (submission, desirabilityScore) {
-  return getEmailDetails(submission, desirabilityScore, emailConfig.notifyTemplate, false, 'FTF@rpa.gov.uk')
+  return getEmailDetails(submission, desirabilityScore, emailConfig.notifyTemplate, false, spreadsheetConfig.rpaEmail)
 }
 
 module.exports = function (submission, desirabilityScore) {
   return {
     applicantEmail: getApplicantEmailDetails(submission, desirabilityScore),
     agentEmail: getAgentEmailDetails(submission, desirabilityScore),
-    rpaEmail: process.env.NODE_ENV === 'production' ? getRPAEmailDetails(submission, desirabilityScore): '',
+    rpaEmail: spreadsheetConfig.sendEmailToRpa ? getRPAEmailDetails(submission, desirabilityScore): '',
     spreadsheet: getSpreadsheetDetails(submission, desirabilityScore)
   }
 }
