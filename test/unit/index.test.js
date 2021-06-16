@@ -10,7 +10,13 @@ cache.initialise = jest.fn((any) => { })
 const server = require('../../app/server')
 server.start = jest.fn(async () => { })
 const receivers = require('../../app/messaging/receivers')
-
+const mockPassword = 'mock-pwd'
+jest.mock('../../app/config/spreadsheet', () => ({
+  hideEmptyRows: true,
+  protectEnabled: true,
+  sendEmailToRpa: true,
+  protectPassword: mockPassword
+}))
 receivers.startProjectDetailsReceiver = jest.fn((a) => {})
 receivers.startContactDetailsReceiver = jest.fn((b) => {})
 receivers.startDesirabilityScoreReceiver = jest.fn((c) => {})
