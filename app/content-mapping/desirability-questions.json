@@ -2,7 +2,7 @@
   "Q14": [
     {
       "key": "Q14",
-      "title": "The project will:",
+      "title": "What impact will the project have?",
       "answers": {
         "Q14-A1": "Change water source",
         "Q14-A2": "Improve irrigation efficiency",
@@ -38,7 +38,7 @@
       "key": "Q17a",
       "title": "Where does your current irrigation water come from?",
       "answers": {
-        "Q17a-A1": "Peak-flow surface water",
+        "Q17a-A1": "Peak-flow/winter abstraction",
         "Q17a-A2": "Rain water harvesting",
         "Q17a-A3": "Bore hole/aquifer",
         "Q17a-A4": "Summer water surface abstraction",
@@ -50,7 +50,7 @@
       "key": "Q17b",
       "title": "Where will your irrigation water come from?",
       "answers": {
-        "Q17b-A1": "Peak-flow surface water",
+        "Q17b-A1": "Peak-flow/winter abstraction",
         "Q17b-A2": "Rain water harvesting",
         "Q17b-A3": "Bore hole/aquifer",
         "Q17b-A4": "Summer water surface abstraction",
