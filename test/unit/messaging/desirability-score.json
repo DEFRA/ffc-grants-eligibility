@@ -30,7 +30,7 @@
         "answers": [
           {
             "key": "Q16a",
-            "title": "Current land irrigated",
+            "title": "How much land is currently irrigated per year?",
             "input": [
               {
                 "key": null,
@@ -40,7 +40,7 @@
           },
           {
             "key": "Q16b",
-            "title": "Future land irrigated",
+            "title": "How much land will be irrigated after the project?",
             "input": [
               {
                 "key": null,
