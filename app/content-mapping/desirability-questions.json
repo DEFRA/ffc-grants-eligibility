@@ -2,7 +2,7 @@
   "Q14": [
     {
       "key": "Q14",
-      "title": "What impact will the project have?",
+      "title": "Project impact",
       "answers": {
         "Q14-A1": "Change water source",
         "Q14-A2": "Improve irrigation efficiency",
@@ -15,7 +15,7 @@
   "Q15": [
     {
       "key": "Q15",
-      "title": "What main crops will be irrigated?",
+      "title": "Main crops",
       "answers": {
         "Q15-A1": "Protected cropping",
         "Q15-A2": "Fruit",
@@ -26,17 +26,17 @@
   "Q16": [
     {
       "key": "Q16a",
-      "title": "How much land is currently irrigated per year?"
+      "title": "Current land irrigated"
     },
     {
       "key": "Q16b",
-      "title": "How much land will be irrigated after the project?"
+      "title": "Future land irrigated"
     }
   ],
   "Q17": [
     {
       "key": "Q17a",
-      "title": "Where does your current irrigation water come from?",
+      "title": "Current water source",
       "answers": {
         "Q17a-A1": "Peak-flow/winter abstraction",
         "Q17a-A2": "Rain water harvesting",
@@ -48,7 +48,7 @@
     },
     {
       "key": "Q17b",
-      "title": "Where will your irrigation water come from?",
+      "title": "Future water source",
       "answers": {
         "Q17b-A1": "Peak-flow/winter abstraction",
         "Q17b-A2": "Rain water harvesting",
@@ -61,7 +61,7 @@
   "Q18": [
     {
       "key": "Q18a",
-      "title": "What systems are currently used to irrigate?",
+      "title": "Current irrigation systems",
       "answers": {
         "Q18a-A1": "Trickle",
         "Q18a-A2": "Mist",
@@ -75,7 +75,7 @@
     },
     {
       "key": "Q18b",
-      "title": "What systems will be used to irrigate?",
+      "title": "Future irrigation systems",
       "answers": {
         "Q18b-A1": "Trickle",
         "Q18b-A2": "Mist",
@@ -90,7 +90,7 @@
   "Q19": [
     {
       "key": "Q19",
-      "title": "How will the project improve productivity?",
+      "title": "Productivity",
       "answers": {
         "Q19-A1": "Introduce or expand high-value crops",
         "Q19-A2": "Introduce or expand protected crops",
@@ -103,7 +103,7 @@
   "Q20": [
     {
       "key": "Q20",
-      "title": "Will water be supplied to other farms?",
+      "title": "Water sharing",
       "answers": {
         "Q20-A1": "Yes",
         "Q20-A2": "No"
