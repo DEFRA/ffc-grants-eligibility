@@ -135,7 +135,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(91, 'Are you an AGENT applying on behalf of your customer', submission.applying === 'Agent' ? 'Yes' : 'No'),
           generateRow(5, 'Surname', submission.farmerDetails.lastName),
           generateRow(6, 'Forename', submission.farmerDetails.firstName),
-          generateRow(25, 'Main applicant gender', submission.farmerDetails.gender),
+          generateRow(25, 'Main applicant gender', 'Applicant preferred not to say'),
           generateRow(24, 'Main applicant age', 'Applicant preferred not to say'),
           generateRow(8, 'Address line 1', submission.farmerDetails.address1),
           generateRow(9, 'Address line 2', submission.farmerDetails.address2),
