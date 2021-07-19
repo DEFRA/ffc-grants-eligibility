@@ -1,6 +1,6 @@
 {
   "name": "ffc-grants-eligibility",
-  "version": "2.16.3",
+  "version": "2.16.4",
   "description": "FFC Grants eligibility and desirability microservice",
   "homepage": "https://github.com/DEFRA/ffc-grants-eligibility",
   "main": "app/index.js",
