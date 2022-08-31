@@ -16,11 +16,11 @@
   "license": "OGL-UK-3.0",
   "dependencies": {
     "@hapi/catbox-redis": "^6.0.2",
-    "@hapi/hapi": "^20.0.3",
+    "@hapi/hapi": "^20.2.2",
     "applicationinsights": "^1.8.10",
-    "ffc-messaging": "^2.1.1",
+    "ffc-messaging": "^2.5.1",
     "ffc-protective-monitoring": "^1.0.0",
-    "joi": "^17.4.0"
+    "joi": "^17.6.0"
   },
   "devDependencies": {
     "@hapi/catbox-memory": "^5.0.0",
