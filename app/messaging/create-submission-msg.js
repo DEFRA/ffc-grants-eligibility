@@ -188,7 +188,7 @@ function getEmailDetails(submission, desirabilityScore, notifyTemplate, agentApp
       lastName: agentApplying ? submission.agentDetails.lastName : submission.farmerDetails.lastName,
       referenceNumber: submission.confirmationId,
       overallRating: desirabilityScore.desirability.overallRating.band,
-      scoreChance: getScoreChance (desirabilityScore.desirability.overallRating.band),
+      scoreChance: getScoreChance(desirabilityScore.desirability.overallRating.band),
       crops: submission.farmingType,
       legalStatus: submission.legalStatus,
       location: `England ${submission.projectPostcode}`,

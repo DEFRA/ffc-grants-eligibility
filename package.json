@@ -16,14 +16,14 @@
   "license": "OGL-UK-3.0",
   "dependencies": {
     "@hapi/catbox-redis": "^6.0.2",
-    "@hapi/hapi": "^20.0.3",
-    "applicationinsights": "^1.8.10",
-    "ffc-messaging": "^2.1.1",
-    "ffc-protective-monitoring": "^1.0.0",
-    "joi": "^17.4.0"
+    "@hapi/hapi": "^20.2.2",
+    "applicationinsights": "^2.3.4",
+    "ffc-messaging": "^2.5.1",
+    "ffc-protective-monitoring": "^1.0.3",
+    "joi": "^17.4.3"
   },
   "devDependencies": {
-    "@hapi/catbox-memory": "^5.0.0",
+    "@hapi/catbox-memory": "^6.0.0",
     "jest": "^26.6.3",
     "jest-junit": "^12.0.0",
     "nodemon": "^2.0.7",
