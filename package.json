@@ -1,11 +1,11 @@
 {
   "name": "ffc-grants-eligibility",
-  "version": "2.16.4",
+  "version": "2.17.0",
   "description": "FFC Grants eligibility and desirability microservice",
   "homepage": "https://github.com/DEFRA/ffc-grants-eligibility",
   "main": "app/index.js",
   "scripts": {
-    "test": "jest --runInBand",
+    "test": "jest --runInBand --detectOpenHandles --forceExit",
     "test:watch": "jest --coverage=false --onlyChanged --watch --runInBand",
     "start:watch": "nodemon --inspect=0.0.0.0 --ext js --legacy-watch app/index.js"
   },
@@ -16,18 +16,19 @@
   "license": "OGL-UK-3.0",
   "dependencies": {
     "@hapi/catbox-redis": "^6.0.2",
-    "@hapi/hapi": "^20.0.3",
-    "applicationinsights": "^1.8.10",
-    "ffc-messaging": "^2.1.1",
-    "ffc-protective-monitoring": "^1.0.0",
-    "joi": "^17.4.0"
+    "@hapi/hapi": "^20.2.2",
+    "applicationinsights": "^2.3.4",
+    "dotenv": "^16.0.2",
+    "ffc-messaging": "^2.5.1",
+    "ffc-protective-monitoring": "^1.0.3",
+    "joi": "^17.6.0"
   },
   "devDependencies": {
-    "@hapi/catbox-memory": "^5.0.0",
-    "jest": "^26.6.3",
-    "jest-junit": "^12.0.0",
-    "nodemon": "^2.0.7",
-    "standard": "^16.0.3"
+    "@hapi/catbox-memory": "^5.0.1",
+    "jest": "^29.0.1",
+    "jest-junit": "^14.0.1",
+    "nodemon": "^2.0.19",
+    "standard": "^17.0.0"
   },
   "standard": {
     "globals": [
