@@ -67,7 +67,7 @@ function generateExcelFilename (scheme, projectName, businessName, referenceNumb
 function getSpreadsheetDetails (submission, desirabilityScore) {
   const today = new Date()
   const todayStr = today.toLocaleDateString('en-GB')
-  const subScheme = 'FTF-Water'
+  const subScheme = 'FTF-Water-Round 2'
 
   return {
     filename: generateExcelFilename(
@@ -95,7 +95,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(341, 'Grant Application Window', ''),
           generateRow(53, 'Business Type', farmingTypeMapping(submission.farmingType)),
           generateRow(23, 'Status of applicant', submission.legalStatus),
-          generateRow(45, 'Location of project (postcode)', submission.projectPostcode),
+          generateRow(45, 'Location of project (postcode)', submission.farmerDetails.projectPostcode),
           generateRow(342, 'Land owned by Farm', submission.landOwnership),
           generateRow(343, 'Tenancy for next 5 years', submission.tenancyLength ?? ''),
           generateRow(344, 'Irrigation Infrastructure ', submission.projectItemsList.join('|')),
@@ -182,7 +182,7 @@ function getEmailDetails(submission, desirabilityScore, notifyTemplate, agentApp
   const email = agentApplying ? submission.agentDetails.email : submission.farmerDetails.email
   return {
     notifyTemplate: emailConfig.notifyTemplate,
-    emailAddress: rpaEmail ? rpaEmail : email ,
+    emailAddress: rpaEmail ? rpaEmail : email,
     details: {
       firstName: agentApplying ? submission.agentDetails.firstName : submission.farmerDetails.firstName,
       lastName: agentApplying ? submission.agentDetails.lastName : submission.farmerDetails.lastName,
@@ -191,7 +191,7 @@ function getEmailDetails(submission, desirabilityScore, notifyTemplate, agentApp
       scoreChance: getScoreChance(desirabilityScore.desirability.overallRating.band),
       crops: submission.farmingType,
       legalStatus: submission.legalStatus,
-      location: `England ${submission.projectPostcode}`,
+      location: `England ${submission.farmerDetails.projectPostcode}`,
       landOwnership: submission.landOwnership,
       tenancyAgreement: submission.tenancyLength ?? 'N/A',
       infrastructureEquipment: submission.projectInfrastucture.join(', '),
