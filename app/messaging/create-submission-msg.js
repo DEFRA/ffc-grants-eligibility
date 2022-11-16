@@ -141,7 +141,7 @@ function getSpreadsheetDetails (submission, desirabilityScore) {
           generateRow(9, 'Address line 2', submission.farmerDetails.address2),
           generateRow(11, 'Address line 4 (town)', submission.farmerDetails.town),
           generateRow(12, 'Address line 5 (county)', submission.farmerDetails.county),
-          generateRow(13, 'Postcode (use capitals)', submission.farmerDetails.postcode),
+          generateRow(13, 'Postcode (use capitals)', submission.farmerDetails.businessPostcode),
           generateRow(16, 'Landline number', submission.farmerDetails.landline),
           generateRow(17, 'Mobile number', submission.farmerDetails.mobile),
           generateRow(18, 'Email', submission.farmerDetails.email),
