@@ -17,7 +17,7 @@
   "dependencies": {
     "@hapi/catbox-redis": "^6.0.2",
     "@hapi/hapi": "^20.2.2",
-    "applicationinsights": "^2.3.4",
+    "applicationinsights": "^2.4.0",
     "dotenv": "^16.0.2",
     "ffc-messaging": "^2.5.1",
     "ffc-protective-monitoring": "^1.0.3",
