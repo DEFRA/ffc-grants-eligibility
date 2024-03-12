@@ -19,7 +19,7 @@
     "@hapi/hapi": "^20.2.2",
     "applicationinsights": "^2.3.4",
     "dotenv": "^16.0.2",
-    "ffc-messaging": "^2.5.1",
+    "ffc-messaging": "^2.9.0",
     "ffc-protective-monitoring": "^1.0.3",
     "joi": "^17.6.0"
   },
